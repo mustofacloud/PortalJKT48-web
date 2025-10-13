@@ -1,0 +1,77 @@
+{
+  "news": [
+    {
+      "_id": "68da689006126ccd4e98bcda",
+      "id": "1956",
+      "date": "2025-09-28T17:00:00.000Z",
+      "label": "/images/icon.cat1.png",
+      "title": "Pengumuman Mengenai Pre-Order JKT48 Digital Photobook “Pertaruhan Cinta” dengan bonus Video Call with JKT48"
+    },
+    {
+      "_id": "68c9715d25772765c68c5339",
+      "id": "1955",
+      "date": "2025-09-15T17:00:00.000Z",
+      "label": "/images/icon.cat2.png",
+      "title": "Pengumuman Mengenai Peraturan “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival"
+    },
+    {
+      "_id": "68c3f3d084e188db37187031",
+      "id": "1954",
+      "date": "2025-09-11T17:00:00.000Z",
+      "label": "/images/icon.cat2.png",
+      "title": "Pengumuman Mengenai Jadwal Penjualan & Timetable “SISTER REUNION” JKT48 & AKB48 Personal Meet & Greet Festival"
+    },
+    {
+      "_id": "68be7f2e84e188db37186812",
+      "id": "1953",
+      "date": "2025-09-07T17:00:00.000Z",
+      "label": "/images/icon.cat2.png",
+      "title": "Rangkuman JKT48 Fanspace"
+    },
+    {
+      "_id": "68bd909484e188db37186771",
+      "id": "1952",
+      "date": "2025-09-06T17:00:00.000Z",
+      "label": "/images/icon.cat2.png",
+      "title": "Pengumuman Mengenai “SISTER REUNION” JKT48 & AKB48 Personal Meet And Greet Festival"
+    },
+    {
+      "_id": "68bc1bb184e188db371864a9",
+      "id": "1951",
+      "date": "2025-09-05T17:00:00.000Z",
+      "label": "/images/icon.cat1.png",
+      "title": "Pengumuman Mengenai Pre-Order JKT48 Digital Photobook “Cake a Wish!” dengan bonus Video Call with JKT48"
+    },
+    {
+      "_id": "68baf7e584e188db3718630f",
+      "id": "1950",
+      "date": "2025-09-04T17:00:00.000Z",
+      "label": "/images/icon.cat1.png",
+      "title": "Pengumuman Mengenai Pertunjukan Perdana “Pertaruhan Cinta\" & JKT48 Theater 13th Anniversary Ceremony"
+    },
+    {
+      "_id": "68bad96d84e188db3718630c",
+      "id": "1949",
+      "date": "2025-09-04T17:00:00.000Z",
+      "label": "/images/icon.cat8.png",
+      "title": "Pengumuman Mengenai Aktivitas Gabriela Abigail"
+    },
+    {
+      "_id": "68ba7cd984e188db371862d3",
+      "id": "1948",
+      "date": "2025-09-04T17:00:00.000Z",
+      "label": "/images/icon.cat1.png",
+      "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha"
+    },
+    {
+      "_id": "68b9313584e188db37186000",
+      "id": "1947",
+      "date": "2025-09-03T17:00:00.000Z",
+      "label": "/images/icon.cat1.png",
+      "title": "Pengumuman Mengenai Graduation 2-Shot Online Indira Seruni dengan Chekicha"
+    }
+  ],
+  "page": 1,
+  "perpage": 10,
+  "total_count": 1749
+}

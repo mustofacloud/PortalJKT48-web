@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Nachia",
+    "birthdate": "2009-10-15T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447287/assets/kabesha/oktober_2024/nina_tutachia.jpg",
+    "room_id": 510065,
+    "url_key": "nachia"
+  },
+  {
+    "name": "Anindya",
+    "birthdate": "2005-10-17T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447251/assets/kabesha/oktober_2024/anindya_ramadhani.jpg",
+    "room_id": 461452,
+    "url_key": "anindya"
+  },
+  {
+    "name": "Lulu",
+    "birthdate": "2002-10-22T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447273/assets/kabesha/oktober_2024/lulu_salsabila.jpg",
+    "room_id": 318232,
+    "url_key": "lulu"
+  },
+  {
+    "name": "Lia",
+    "birthdate": "2002-10-28T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447252/assets/kabesha/oktober_2024/aurellia.jpg",
+    "room_id": 400713,
+    "url_key": "lia"
+  },
+  {
+    "name": "Gracie",
+    "birthdate": "2007-10-17T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447267/assets/kabesha/oktober_2024/grace_octaviani.jpg",
+    "room_id": 461478,
+    "url_key": "gracie"
+  },
+  {
+    "name": "Lily",
+    "birthdate": "2007-10-18T17:00:00.000Z",
+    "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447283/assets/kabesha/oktober_2024/hillary_abigail.jpg",
+    "room_id": 510012,
+    "url_key": "lily"
+  }
+]

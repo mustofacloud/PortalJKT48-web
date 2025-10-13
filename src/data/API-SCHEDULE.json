@@ -1,0 +1,88 @@
+{
+  "theater": {
+    "upcoming": [
+      {
+        "id": "3001",
+        "title": "Cara Meminum Ramune",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1709811568/hm6aztwojrngb6ryrdn9.png",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1702404446/nixg3rixpjpom3xa0ivf.jpg",
+        "member_count": 16,
+        "url": "3001",
+        "date": "2025-10-02T12:00:00.000Z"
+      },
+      {
+        "id": "3002",
+        "title": "Pajama Drive",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1717174039/ud3mb6r76obaftx4snzy.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1717174034/xspjxcs9wwm9jxwhiy5q.jpg",
+        "member_count": 12,
+        "url": "3002",
+        "date": "2025-10-04T07:00:00.000Z"
+      },
+      {
+        "id": "3003",
+        "title": "Pertaruhan Cinta",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1759095948/a9dhtlgdtjtxqtm79cc0.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1759095945/zciqjagfiyp8jsq1pezb.jpg",
+        "member_count": 0,
+        "url": "3003",
+        "date": "2025-10-05T12:00:00.000Z"
+      }
+    ],
+    "recent": [
+      {
+        "id": "3000",
+        "title": "Sambil Menggandeng Erat Tanganku",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1746940449/zjdka1gtuuoc5gx9kkco.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1743898507/nvw4gqjtdhje2ftxt9i1.jpg",
+        "member_count": 12,
+        "seitansai": [
+          {
+            "id": 215,
+            "name": "Jessica Chandra",
+            "img": "https://res.cloudinary.com/haymzm4wp/image/upload/v1730447271/assets/kabesha/oktober_2024/jessica_chandra.jpg",
+            "url_key": "jessi"
+          }
+        ],
+        "url": "3000",
+        "date": "2025-09-27T09:00:00.000Z"
+      },
+      {
+        "id": "2999",
+        "title": "Ingin Bertemu",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1746940686/gnzangtum7a8ygmk8hvj.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1697224788/uploads/w2zvghwk8tocey8e8xhv.jpg",
+        "member_count": 12,
+        "url": "2999",
+        "date": "2025-09-26T12:00:00.000Z"
+      },
+      {
+        "id": "2998",
+        "title": "Aturan Anti Cinta",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1709811057/hjsfgaw0kf3fhxg677fs.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1741335946/wpbrggj7xzuk22uytziz.jpg",
+        "member_count": 16,
+        "url": "2998",
+        "date": "2025-09-25T12:00:00.000Z"
+      },
+      {
+        "id": "2997",
+        "title": "Pajama Drive",
+        "banner": "https://res.cloudinary.com/haymzm4wp/image/upload/v1717174039/ud3mb6r76obaftx4snzy.jpg",
+        "poster": "https://res.cloudinary.com/haymzm4wp/image/upload/v1717174034/xspjxcs9wwm9jxwhiy5q.jpg",
+        "member_count": 12,
+        "url": "2997",
+        "date": "2025-09-24T12:00:00.000Z"
+      }
+    ]
+  },
+  "other_schedule": [
+    {
+      "id": "20251004-synchronize-fest",
+      "date": "2025-10-03T17:00:00.000Z",
+      "label": "/images/icon.cat2.png",
+      "title": "Synchronize Fest",
+      "url": "/calendar/list/y/2025/m/10/d/4?lang=id"
+    }
+  ]
+}

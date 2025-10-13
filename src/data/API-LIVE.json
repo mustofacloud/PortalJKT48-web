@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Auwia / アウウィア (JKT48)",
+    "img": "https://static.showroom-live.com/image/room/cover/395a44859836458b6398510a4e44d20ac1e5824cbe43fce6ad82e6729764a2aa_l.jpeg?v=1743174598",
+    "img_alt": "https://res.cloudinary.com/haymzm4wp/image/upload/v1733164652/jkt48/kabesha-gen13/aulia_riza.jpg",
+    "url_key": "JKT48_Auwia",
+    "room_id": 547062,
+    "started_at": "2025-04-15T11:55:56.000Z",
+    "is_graduate": false,
+    "is_group": false,
+    "type": "showroom",
+    "streaming_url_list": [
+      {
+        "label": "original quality",
+        "quality": 1500,
+        "url": "https://hls-css.live.showroom-live.com/live/f25a325280e83879d4ce78fc72946fb7fe2b773ae4f4a1365271826834401088.m3u8"
+      },
+      {
+        "label": "low quality",
+        "quality": 150,
+        "url": "https://hls-css.live.showroom-live.com/live/f25a325280e83879d4ce78fc72946fb7fe2b773ae4f4a1365271826834401088_l.m3u8"
+      }
+    ],
+    "is_premium": false
+  },
+  {
+    "name": "Intan / インタン (JKT48)",
+    "img": "https://static.showroom-live.com/image/room/cover/a1e1c18ae74668eb568ed90208dbde1afbb55ca8d5049387d5c06ffbfe11d41c_l.jpeg?v=1743174498",
+    "img_alt": "https://res.cloudinary.com/haymzm4wp/image/upload/v1733164660/jkt48/kabesha-gen13/nur_intan.jpg",
+    "url_key": "JKT48_Intan",
+    "room_id": 547073,
+    "started_at": "2025-04-15T13:18:18.000Z",
+    "is_graduate": false,
+    "is_group": false,
+    "type": "showroom",
+    "streaming_url_list": [
+      {
+        "label": "original quality",
+        "quality": 1500,
+        "url": "https://hls-css.live.showroom-live.com/live/4f7549f7273c06ffbeb664dbc21516f087f3b5d2f907b1820bf342106dfc1aec.m3u8"
+      },
+      {
+        "label": "low quality",
+        "quality": 150,
+        "url": "https://hls-css.live.showroom-live.com/live/4f7549f7273c06ffbeb664dbc21516f087f3b5d2f907b1820bf342106dfc1aec_l.m3u8"
+      }
+    ],
+    "is_premium": false
+  },
+  {
+    "name": "Lana",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/e2af7271-2598-4ee8-8760-68043e671e6d-250415193321.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/a390f0bed11a773710648af657470bb8.webp?v=1731483263",
+    "url_key": "jkt48_lana",
+    "slug": "ayo-ngobrol-bareng-250415193321",
+    "room_id": 509997,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/MVoqsMnedwqz",
+    "started_at": "2025-04-15T12:33:30.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.XcUYof208I6e.m3u8"
+      }
+    ],
+    "type": "idn"
+  },
+  {
+    "name": "Nala",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/8fc7ad64-f7be-492b-97b6-2dae3378dfe2-250415202542.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/23ec81c50947a98e513e2371ccd140e5.webp?v=1731483390",
+    "url_key": "jkt48_nala",
+    "slug": "ayo-ngobrol-bareng-250415202542",
+    "room_id": 510071,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/Pqb57KR18YXr",
+    "started_at": "2025-04-15T13:25:53.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.nCPKiODqPEOs.m3u8"
+      }
+    ],
+    "type": "idn"
+  },
+  {
+    "name": "Aralie",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/f001ba66-3c51-4849-9afa-13cf74eb1571-250415202553.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/71e9df185dcc84e99ddf1dc97cc37467.webp?v=1731483208",
+    "url_key": "jkt48_aralie",
+    "slug": "haii-250415202553",
+    "room_id": 509985,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/E0I7e29Eqkw6",
+    "started_at": "2025-04-15T13:26:10.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.oxXRFBYUK9HN.m3u8"
+      }
+    ],
+    "type": "idn"
+  },
+  {
+    "name": "Nayla",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/e243be19-74b7-435b-8e19-13fc669e0224-250415203055.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/910f26252548bf370c7492e9ec668250.webp?v=1731483328",
+    "url_key": "jkt48_nayla",
+    "slug": "ayo-ngobrol-bareng-250415203055",
+    "room_id": 510064,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/LjFMV7rpbjHp",
+    "started_at": "2025-04-15T13:31:03.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.s29ur0XkIpE2.m3u8"
+      }
+    ],
+    "type": "idn"
+  },
+  {
+    "name": "Nachia",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/21a420b0-dd01-4daa-b185-b9020f8bf69d-250415203323.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/48887ca3b5d4c5cce2d53cee2e024118.webp?v=1731483328",
+    "url_key": "jkt48_nachia",
+    "slug": "ayo-ngobrol-bareng-250415203323",
+    "room_id": 510065,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/7GRCSbmwgd4L",
+    "started_at": "2025-04-15T13:33:39.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.zVh5JKAAtDUC.m3u8"
+      }
+    ],
+    "type": "idn"
+  },
+  {
+    "name": "Jessi",
+    "img": "https://cdn.idntimes.com/content-images/post/20250415/a9579a29-9203-40c0-9326-9837b8eae6e8-250415205158.jpg",
+    "img_alt": "https://cdn.idn.media/idnaccount/avatar/500/dfa51cbb14d8a3185c35228f1f765ae5.webp?v=1731411028",
+    "url_key": "jkt48_jessi",
+    "slug": "jesi-imut-250415205158",
+    "room_id": 318228,
+    "is_graduate": false,
+    "is_group": false,
+    "chat_room_id": "arn:aws:ivschat:us-east-1:050891932989:room/DB4L56nemB2B",
+    "started_at": "2025-04-15T13:52:07.000Z",
+    "streaming_url_list": [
+      {
+        "label": "original",
+        "quality": 1,
+        "url": "https://4b964ca68cf1.us-east-1.playback.live-video.net/api/video/v1/us-east-1.050891932989.channel.726SnUjvlfRJ.m3u8"
+      }
+    ],
+    "type": "idn"
+  }
+]
