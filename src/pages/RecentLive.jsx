@@ -7,14 +7,20 @@ export default function RecentLive() {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [platform, setPlatform] = useState("all");
-  const [status, setStatus] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const perpage = 12;
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
         console.log("[RecentLive] Fetching data...");
-        const res = await fetchRecent();
+        const filter = "active";
+        const type = platform === "all" ? "all" : platform;
+        const res = await fetchRecent(search, filter, type, page, perpage);
         console.log("[RecentLive] Raw response:", res);
 
         let list = [];
@@ -25,6 +31,9 @@ export default function RecentLive() {
         }
 
         setItems(list);
+        setTotalCount(res.total_count || 0);
+        setTotalPages(Math.ceil((res.total_count || 0) / perpage));
+        window.scrollTo(0, 0);
       } catch (e) {
         console.error("[RecentLive] Error fetch:", e);
         setItems([]);
@@ -32,59 +41,92 @@ export default function RecentLive() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [page, search, platform]);
+
+
 
   if (loading) return <SkeletonLoader type="recent" />;
 
-  const filtered = items.filter((it) => {
-    const matchSearch =
-      !search ||
-      it.member?.nickname?.toLowerCase().includes(search.toLowerCase()) ||
-      it.member?.name?.toLowerCase().includes(search.toLowerCase()) ||
-      it.idn?.title?.toLowerCase().includes(search.toLowerCase());
 
-    const matchPlatform =
-      platform === "all" || it.type?.toLowerCase() === platform;
-
-    const matchStatus =
-      status === "all" ||
-      (status === "active" && !it.member?.is_graduate) ||
-      (status === "graduated" && it.member?.is_graduate);
-
-    return matchSearch && matchPlatform && matchStatus;
-  });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 text-gray-200">
-      <div className="flex-1 space-y-4">
-        <h2 className="text-2xl font-bold mb-3 text-black">🎥 Live Terbaru</h2>
+    <div className="max-w-7xl mx-auto py-1 text-gray-800">
+      {/* HEADER */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-2xl font-bold text-white">
+          🎥 Live Terbaru
+        </h2>
+      </div>
 
-        {filtered.length === 0 ? (
-          <div className="text-red-700 rounded-lg p-6 text-center">
-            Tidak ada data recent live ⚠
-          </div>
-        ) : (
-          filtered.map((item, idx) => (
+      {/* FILTER PLATFORM */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        {["showroom", "idn", "all"].map((p) => (
+          <button
+            key={p}
+            onClick={() => {
+              setPlatform(p);
+              setPage(1);
+            }}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition cursor-pointer ${
+              platform === p
+                ? "bg-red-400 text-white"
+                : "bg-[#0b0b0b] text-gray-200 hover:bg-[#2a0e12]"
+            }`}
+          >
+            {p === "showroom"
+              ? "Showroom"
+              : p === "idn"
+              ? "IDN Live"
+              : "Semua"}
+          </button>
+        ))}
+
+        {/* SEARCH BAR */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Cari member atau judul..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+          />
+        </div>
+      </div>
+
+      {/* GRID ITEMS */}
+      {items.length === 0 ? (
+        <div className="text-center py-20 text-gray-500">
+          <p className="text-lg font-semibold text-red-600 mb-2">
+            Tidak ada data recent live ⚠️
+          </p>
+          <p className="text-sm">Coba ubah pencarian atau kategori.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+          {items.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col sm:flex-row bg-white border rounded-xl overflow-hidden hover:border-red-700 transition-colors duration-200"
+              className="flex flex-col md:flex-row bg-white border rounded-xl overflow-hidden hover:border-red-700 transition-colors duration-200"
             >
               <img
                 src={item.member?.img_alt || item.member?.img}
                 alt={item.member?.nickname}
-                className="w-full sm:w-32 h-48 sm:h-auto object-cover"
+                className="w-16 h-16 md:w-32 md:h-48 object-cover rounded-full md:rounded-none mx-auto mt-4 md:mt-0 md:mr-0"
               />
 
-              <div className="flex-1 p-4 flex flex-col justify-between">
+              <div className="flex-1 p-3 md:p-4 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-700">
+                  <h3 className="text-sm md:text-lg font-semibold text-gray-700 text-center md:text-left">
                     {item.member?.nickname}
                   </h3>
-                  <p className="text-sm text-red-400 mt-1">
+                  <p className="text-xs md:text-sm text-red-400 mt-1 text-center md:text-left">
                     {item.idn?.title || "-"}
                   </p>
 
-                  <div className="mt-2 flex flex-wrap gap-4 text-xs text-gray-400">
+                  <div className="mt-2 flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 text-xs text-gray-400">
                     <span>
                       👥{" "}
                       {item.live_info?.viewers?.num?.toLocaleString("id-ID") ||
@@ -101,7 +143,7 @@ export default function RecentLive() {
                   </div>
                 </div>
 
-                <div className="text-xs text-gray-500 mt-3">
+                <div className="text-xs text-gray-500 mt-2 md:mt-3 text-center md:text-left">
                   {item.live_info?.date?.end
                     ? new Date(item.live_info.date.end).toLocaleString("id-ID", {
                         dateStyle: "medium",
@@ -111,7 +153,7 @@ export default function RecentLive() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-center sm:justify-end p-4 sm:w-32 border-t sm:border-t-0 sm:border-l border-[#3a0f12] bg-gray-700">
+              <div className="flex items-center justify-center md:justify-end p-3 md:p-4 md:w-32 border-t md:border-t-0 md:border-l border-[#3a0f12] bg-gray-700">
                 <Link
                   to={`/recent/${item.data_id}`}
                   className="px-3 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-md text-sm transition"
@@ -120,68 +162,69 @@ export default function RecentLive() {
                 </Link>
               </div>
             </div>
-          ))
-        )}
-      </div>
-
-      <aside className="w-full md:w-72 flex-shrink-0 space-y-4">
-        <h2 className="text-2xl font-bold mb-3 text-black">🔍 Filter</h2>
-        <div className="bg-gray-700 border border-gray-500 rounded-xl p-4 space-y-4">
-          <input
-            type="text"
-            placeholder="Cari member atau judul..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-2 rounded-md bg-gray-200 text-black border border-[#3a0f12] text-sm focus:outline-none focus:ring-1 focus:ring-red-700"
-          />
-
-          <div>
-            <p className="text-sm font-medium mb-2">Platform</p>
-            <div className="flex gap-2 flex-wrap">
-              {["showroom", "idn", "all"].map((p) => (
-                <button
-                  key={p}
-                  onClick={() => setPlatform(p)}
-                  className={`px-3 py-1.5 rounded-md text-sm transition ${
-                    platform === p
-                      ? "bg-red-700 text-white"
-                      : "bg-gray-200 text-black hover:bg-[#2a0f12]"
-                  }`}
-                >
-                  {p === "showroom"
-                    ? "Showroom"
-                    : p === "idn"
-                    ? "IDN Live"
-                    : "Semua"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-sm font-medium mb-2">Status Member</p>
-            <div className="flex gap-2 flex-wrap">
-              {["active", "graduated", "all"].map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setStatus(s)}
-                  className={`px-3 py-1.5 rounded-md text-sm transition ${
-                    status === s
-                      ? "bg-red-700 text-white"
-                      : "bg-gray-200 text-black hover:bg-[#2a0f12]"
-                  }`}
-                >
-                  {s === "active"
-                    ? "Active"
-                    : s === "graduated"
-                    ? "Graduated"
-                    : "Semua"}
-                </button>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
-      </aside>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex flex-wrap justify-center items-center gap-2 mt-8">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            className={`px-3 py-1.5 text-sm rounded-md ${
+              page === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
+            }`}
+          >
+            ⟨ Sebelumnya
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter(
+              (p) =>
+                p === 1 ||
+                p === totalPages ||
+                (p >= page - 2 && p <= page + 2)
+            )
+            .map((p, idx, arr) => {
+              const next = arr[idx + 1];
+              return (
+                <React.Fragment key={p}>
+                  <button
+                    onClick={() => setPage(p)}
+                    className={`px-3 py-1.5 rounded-md text-sm font-medium transition ${
+                      page === p
+                        ? "bg-red-400 text-white"
+                        : "bg-gray-100 text-gray-800 hover:bg-gray-200 cursor-pointer"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                  {next && next - p > 1 && (
+                    <span className="text-gray-400 px-1">...</span>
+                  )}
+                </React.Fragment>
+              );
+            })}
+
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            className={`px-3 py-1.5 text-sm rounded-md ${
+              page === totalPages
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
+            }`}
+          >
+            Berikutnya ⟩
+          </button>
+        </div>
+      )}
+
+      <p className="text-center text-xs text-gray-750 mt-3">
+        Halaman {page} dari {totalPages}
+      </p>
     </div>
   );
 }

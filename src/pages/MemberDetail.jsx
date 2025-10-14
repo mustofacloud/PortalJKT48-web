@@ -115,9 +115,9 @@ export default function MemberDetail() {
     : "Belum ada data";
 
   return (
-    <div className="text-gray-800 rounded-xl overflow-hidden shadow-lg max-w-7xl mx-auto my-8">
+    <div className="text-gray-800 rounded-xl overflow-hidden shadow-lg max-w-7xl mx-auto my-1">
       {/* Tombol Kembali */}
-      <div className="p-4">
+      <div className="p-1">
         <Link
           to="/member"
           className="bg-black/50 text-white px-3 py-1 rounded-md text-sm hover:bg-black/70"
@@ -136,7 +136,7 @@ export default function MemberDetail() {
             className="w-32 h-40 md:w-40 md:h-52 object-cover rounded-md border-4 border-white shadow-md"
           />
           <div>
-            <h2 className="text-2xl font-bold text-black">{name}</h2>
+            <h2 className="text-2xl font-bold text-white">{name}</h2>
             <p className="text-sm text-gray-600">{nickname}</p>
             <p className="text-xs text-red-500 mt-1">
               {generation?.toUpperCase()} •{" "}

@@ -65,7 +65,7 @@ export default function JadwalDetail() {
   const formattedDate = dayjs(date).format("dddd, DD MMMM YYYY HH:mm");
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <div className="max-w-6xl mx-auto py-1 space-y-10">
       {setlist?.banner && (
         <div className="relative w-full h-52 sm:h-64 md:h-80 rounded-xl overflow-hidden shadow">
           <img
@@ -159,7 +159,7 @@ export default function JadwalDetail() {
       </section>
 
       <section>
-        <h3 className="text-xl font-semibold mb-4">👩‍🎤 Member Performing</h3>
+        <h3 className="text-xl text-white font-semibold mb-4">👩‍🎤 Member Performing</h3>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {members && members.length > 0 ? (
             members.map((m) => <MemberSmallCard key={m.id} data={m} />)

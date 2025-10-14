@@ -39,10 +39,10 @@ export default function MemberList() {
   if (loading) return <SkeletonLoader type="member" />;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 text-gray-800">
+    <div className="max-w-7xl mx-auto py-1 text-gray-800">
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl font-bold text-black">
+        <h2 className="text-2xl font-bold text-white">
           👩‍🎤 Daftar Member JKT48
         </h2>
       </div>

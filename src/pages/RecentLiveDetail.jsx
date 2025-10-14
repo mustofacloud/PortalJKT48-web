@@ -121,7 +121,7 @@ export default function RecentLiveDetail() {
   const totalScreens = screenshots?.list?.length || 0;
 
   return (
-    <div className="text-gray-200 rounded-xl borderoverflow-hidden shadow-lg max-w-7xl mx-auto my-8">
+    <div className="text-gray-200 rounded-xl borderoverflow-hidden shadow-lg max-w-7xl mx-auto my-1">
       <div
         className="h-48 bg-cover bg-center relative rounded-t-xl"
         style={{ backgroundImage: `url(${banner})` }}
@@ -141,7 +141,7 @@ export default function RecentLiveDetail() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {totalScreens > 0 && (
-            <div className="relative bg-white p-2 rounded-lg border">
+            <div className="relative bg-white p-2 rounded-lg border place-content-center">
               <button
                 onClick={() => {
                   isInteracting.current = true;

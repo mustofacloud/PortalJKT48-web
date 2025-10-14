@@ -19,8 +19,9 @@ export async function fetchLive() {
   return res.data;
 }
 
-export async function fetchRecent() {
-  const res = await axios.get(BASE.recent);
+export async function fetchRecent(search = "", filter = "active", type = "all", page = 1, perpage = 12) {
+  const url = `https://api.crstlnz.my.id/api/recent?sort=date&page=${page}&filter=${filter}&order=-1&perpage=${perpage}&search=${encodeURIComponent(search)}&room_id=&group=jkt48&type=${type}`;
+  const res = await axios.get(url);
   return res.data;
 }
 

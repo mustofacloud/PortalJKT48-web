@@ -146,7 +146,7 @@ export default function WatchLivePage() {
 
   return (
     <div className="w-full min-h-screen text-white overflow-hidden">
-      <div className="grid md:grid-cols-5 md:grid-rows-5 md:gap-4 h-screen md:p-4">
+      <div className="grid md:grid-cols-5 md:grid-rows-5 md:gap-4 h-screen p-1">
         <div className="md:col-span-3 md:row-span-4 bg-black rounded-xl overflow-hidden relative flex items-center justify-center">
           <video
             ref={videoRef}

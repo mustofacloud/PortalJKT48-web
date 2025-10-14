@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SkeletonLoader from "../utils/SkeletonLoader"
+import { HiSignalSlash } from "react-icons/hi2";
 import { fetchLive, fetchNews, fetchBirthday } from "../utils/api/api";
 import LiveCard from "../components/LiveCard";
 import NewsCard from "../components/NewsCard";
@@ -48,20 +49,18 @@ export default function Home() {
   if (loading) return <SkeletonLoader type="home" />;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-10 text-white">
+    <div className="max-w-7xl mx-auto py-1 space-y-10 text-white">
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-black">🎥 Member Live</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">🎥 Member Live</h2>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 place-items-stretch">
           {!error && live.length > 0 ? (
             live.map((item, idx) => <LiveCard key={idx} live={item} />)
           ) : (
-            <div className="col-span-full flex flex-col items-center text-center py-8">
-              <img
-                src={errorImg}
-                alt="Error"
-                className="w-28 h-28 mb-3 opacity-90"
-              />
+            <div className="col-span-full flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+              <span>
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+              </span>
               <p className="text-red-500 font-semibold">
                 {error
                   ? "Gagal memuat data Live ⚠️"
@@ -74,7 +73,7 @@ export default function Home() {
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-black">🎂 Ulang Tahun Terdekat</h2>
+          <h2 className="text-2xl font-bold mb-4 text-white">🎂 Ulang Tahun Terdekat</h2>
           {!error && birthday.length > 0 ? (
             <div className="space-y-3">
               {birthday.slice(0, 3).map((b, idx) => (
@@ -82,12 +81,10 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8">
-              <img
-                src={errorImg}
-                alt="Error"
-                className="w-20 h-20 mb-3 opacity-80"
-              />
+            <div className="flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+              <span>
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+              </span>
               <p className="text-red-500 font-semibold">
                 {error
                   ? "Gagal memuat data ulang tahun ⚠️"
@@ -98,7 +95,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-black">📰 Berita Terbaru</h2>
+          <h2 className="text-2xl font-bold mb-4 text-white ">📰 Berita Terbaru</h2>
 
           {!error && news.length > 0 ? (
             <div className="space-y-3">
@@ -107,12 +104,10 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8">
-              <img
-                src={errorImg}
-                alt="Error"
-                className="w-20 h-20 mb-3 opacity-80"
-              />
+            <div className="flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+              <span>
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+              </span>
               <p className="text-red-500 font-semibold">
                 {error
                   ? "Gagal memuat berita terbaru ⚠️"
@@ -124,7 +119,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-black">👩‍🎤 Member List</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">👩‍🎤 Member List</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {memberData.slice(0, 6).map((m, idx) => (
             <MemberCard key={idx} data={m} />
