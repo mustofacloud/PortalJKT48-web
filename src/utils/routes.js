@@ -10,6 +10,7 @@ import RecentLiveDetail from "../pages/RecentLiveDetail";
 import MemberList from "../pages/MemberList";
 import MemberDetail from "../pages/MemberDetail";
 import NewsDetail from "../pages/NewsDetail";
+import MultiroomPage from "../pages/MultiroomPage";
 import React from "react";
 
 const appRoutes = [
@@ -28,6 +29,7 @@ const appRoutes = [
       { path: "member", element: React.createElement(MemberList) },
       { path: "member/:url", element: React.createElement(MemberDetail) },
       { path: "news/:id", element: React.createElement(NewsDetail) },
+      { path: "multiroom", element: React.createElement(MultiroomPage) },
     ],
   },
 ];

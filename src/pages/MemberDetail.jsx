@@ -154,7 +154,7 @@ export default function MemberDetail() {
       </div>
 
       {/* Konten utama */}
-      <div className="pt-6 px-6 pb-8">
+      <div className="pt-3 px-6 pb-8">
         {/* Informasi pribadi & deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-4 rounded-md space-y-1">
@@ -184,7 +184,7 @@ export default function MemberDetail() {
         </div>
 
         {/* Statistik */}
-        <div className="mt-6 bg-white p-4 rounded-md">
+        <div className="mt-3 bg-white p-4 rounded-md">
           <h3 className="font-semibold text-lg text-red-600 mb-3 flex items-center gap-2">
             <BarChart2 className="w-5 h-5 text-red-600" /> Statistik Live
           </h3>

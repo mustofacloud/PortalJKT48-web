@@ -51,9 +51,18 @@ export default function Home() {
   return (
     <div className="max-w-7xl mx-auto py-1 space-y-10 text-white">
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-white">🎥 Member Live</h2>
-
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 place-items-stretch">
+        <h2 className="flex items-center justify-between text-2xl font-bold mb-4 text-white">
+          <span>🎥 Member Live</span>
+          {live.length > 0 ? (
+            <div className="relative">
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+              <div className="absolute top-0 left-0 w-3 h-3 bg-red-500 rounded-full"></div>
+            </div>
+          ) : (
+            <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+          )}
+        </h2>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-3">
           {!error && live.length > 0 ? (
             live.map((item, idx) => <LiveCard key={idx} live={item} />)
           ) : (
@@ -120,7 +129,7 @@ export default function Home() {
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-white">👩‍🎤 Member List</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-3">
           {memberData.slice(0, 6).map((m, idx) => (
             <MemberCard key={idx} data={m} />
           ))}

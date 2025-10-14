@@ -136,12 +136,12 @@ export default function RecentLiveDetail() {
         </div>
       </div>
 
-      <div className="pt-16 px-6 pb-8">
+      <div className="pt-16 px-6 pb-1">
         <h2 className="text-2xl font-bold text-red-400">{nickname}</h2>
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {totalScreens > 0 && (
-            <div className="relative bg-white p-2 rounded-lg border place-content-center">
+            <div className="relative bg-white p-2 rounded-lg border place-content-center max-h-150">
               <button
                 onClick={() => {
                   isInteracting.current = true;
@@ -186,7 +186,7 @@ export default function RecentLiveDetail() {
                       <img
                         src={imgUrl}
                         alt={`screenshot-${idx}`}
-                        className="w-full max-w-xl h-auto object-contain rounded-md"
+                        className="w-full max-w-xl max-h-140 object-contain rounded-md"
                       />
                     </div>
                   );
@@ -237,7 +237,7 @@ export default function RecentLiveDetail() {
               <p className="text-sm text-black font-semibold py-1">
                 🎁 Gift List
               </p>
-              <ul className="space-y-2 text-xs max-h-100 overflow-y-auto custom-scrollbar">
+              <ul className="space-y-2 text-xs max-h-150 overflow-y-auto custom-scrollbar">
                 {gift.slice(0, 200).map((g, idx) => (
                   <li
                     key={idx}

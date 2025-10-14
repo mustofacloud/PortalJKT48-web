@@ -7,6 +7,7 @@ import {
   Newspaper,
   PlayCircle,
   Info,
+  Grid3X3,
 } from "lucide-react";
 import logoHeader from "../assets/logo_header.png";
 
@@ -19,6 +20,7 @@ const Navbar = () => {
     { to: "/jadwal", label: "Jadwal", icon: <CalendarDays size={16} /> },
     { to: "/news", label: "News", icon: <Newspaper size={16} /> },
     { to: "/recent-live", label: "Recent Live", icon: <PlayCircle size={16} /> },
+    { to: "/multiroom", label: "Multiroom", icon: <Grid3X3 size={16} /> },
     { to: "/about", label: "About", icon: <Info size={16} /> },
   ];
 

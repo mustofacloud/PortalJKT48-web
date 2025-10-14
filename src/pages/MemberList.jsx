@@ -79,7 +79,7 @@ export default function MemberList() {
 
       {/* GRID MEMBER */}
       {filteredMembers.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4">
           {filteredMembers.map((member, i) => (
             <MemberCard key={i} data={member} />
           ))}

@@ -33,7 +33,7 @@ export default function Jadwal() {
     <div className="max-w-7xl mx-auto px-2 py-1 space-y-10">
       <section>
         <h2 className="text-2xl font-bold mb-4 text-white">🎟️ Jadwal Mendatang</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {upcoming.length > 0 ? (
             upcoming.map((item) => (
               <Link key={item.id} to={`/jadwal/${item.id}`} className="block">
@@ -48,7 +48,7 @@ export default function Jadwal() {
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-white">🕓 Jadwal Terbaru</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 gap-5">
           {recent.length > 0 ? (
             recent.map((item) => (
               <Link key={item.id} to={`/jadwal/${item.id}`} className="block">

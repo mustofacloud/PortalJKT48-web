@@ -146,7 +146,7 @@ export default function WatchLivePage() {
 
   return (
     <div className="w-full min-h-screen text-white overflow-hidden">
-      <div className="grid md:grid-cols-5 md:grid-rows-5 md:gap-4 h-screen p-1">
+      <div className="grid md:grid-cols-5 md:grid-rows-6 md:gap-4 h-screen p-1">
         <div className="md:col-span-3 md:row-span-4 bg-black rounded-xl overflow-hidden relative flex items-center justify-center">
           <video
             ref={videoRef}
@@ -196,7 +196,7 @@ export default function WatchLivePage() {
           )}
         </div>
 
-        <div className="md:col-span-2 md:row-span-5 md:col-start-4 bg-[#111] rounded-xl flex flex-col overflow-hidden h-[40vh] md:h-auto">
+        <div className="md:col-span-2 md:row-span-6 md:col-start-4 bg-[#111] rounded-xl flex flex-col overflow-hidden h-[40vh] md:h-auto">
           <div className="flex">
             <button
               className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
