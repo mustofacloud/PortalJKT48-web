@@ -38,7 +38,7 @@ export default function LiveCard({ live }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className="group block bg-white rounded-lg p-2 flex flex-col w-full max-w-[140px] text-gray-200 hover:scale-[1.03] hover:border-red-700 transition-transform duration-200"
+      className="group block bg-slate-900 rounded-lg p-2 flex flex-col w-full max-w-[140px] text-gray-200 hover:scale-[1.03] hover:border-red-700 transition-transform duration-200 border border-slate-700"
     >
       <div className="w-full aspect-[9/16] rounded-md overflow-hidden bg-black relative">
         <img
@@ -50,7 +50,7 @@ export default function LiveCard({ live }) {
       </div>
 
       <div className="mt-2 flex-1">
-        <h4 className="font-semibold text-[12px] truncate text-black group-hover:text-red-400 transition">
+        <h4 className="font-semibold text-[12px] truncate text-gray-100 group-hover:text-red-400 transition">
           {title}
         </h4>
 
@@ -74,7 +74,7 @@ export default function LiveCard({ live }) {
             />
           )}
           {live.type === "youtube" && (
-            <div className="flex items-center gap-1 text-red-500 font-semibold text-[10px]">
+            <div className="flex items-center gap-1 text-red-400 font-semibold text-[10px]">
               <FaYoutube size={12} /> YouTube
             </div>
           )}

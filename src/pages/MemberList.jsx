@@ -42,7 +42,7 @@ export default function MemberList() {
     <div className="max-w-7xl mx-auto py-1 text-gray-800">
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl font-bold text-white">
+        <h2 className="text-2xl font-bold text-gray-100">
           👩‍🎤 Daftar Member JKT48
         </h2>
       </div>
@@ -72,7 +72,7 @@ export default function MemberList() {
             placeholder="Cari member..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+            className="border border-gray-700 rounded-md px-3 py-2 text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-800 text-white"
           />
         </div>
       </div>

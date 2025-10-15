@@ -9,12 +9,12 @@ export default function TheaterCard({ data, type }) {
   const formattedDate = dayjs(date).format("DD MMM YYYY, HH:mm");
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col h-full">
+    <div className="bg-slate-900 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col h-full">
       <div className="relative w-full aspect-[3/4] bg-gray-200 flex items-center justify-center overflow-hidden">
         <img
           src={poster}
           alt={title}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center hover:scale-115 transition duration-250"
           loading="lazy"
         />
 
@@ -32,10 +32,10 @@ export default function TheaterCard({ data, type }) {
 
       <div className="flex flex-col flex-grow justify-between p-3">
         <div>
-          <h3 className="font-semibold text-gray-800 text-sm line-clamp-2 leading-tight min-h-[2.5rem]">
+          <h3 className="font-semibold text-white text-sm line-clamp-2 leading-tight min-h-[2.5rem]">
             {title}
           </h3>
-          <p className="text-xs text-gray-500 mt-1">{formattedDate}</p>
+          <p className="text-xs text-white/70 mt-1">{formattedDate}</p>
         </div>
 
         {seitansai && seitansai.length > 0 && (

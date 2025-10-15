@@ -8,6 +8,8 @@ import {
   PlayCircle,
   Info,
   Grid3X3,
+  Moon,
+  Sun,
 } from "lucide-react";
 import logoHeader from "../assets/logo_header.png";
 
@@ -25,7 +27,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0 rounded-b-3xl">
+    <nav className="bg-slate-900 fixed w-full z-20 top-0 left-0 rounded-b-3xl transition-colors duration-300">
       <div className="container mx-auto flex justify-between items-center p-3">
         {/* 🔻 Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -36,23 +38,24 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* 🔻 Tombol toggle mobile */}
-        <button
-          className="md:hidden text-gray-700 text-2xl"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "✕" : "☰"}
-        </button>
+        {/* 🔻 Tombol toggle mobile dan dark mode */}
+        <div className="flex items-center gap-2">
+          <button
+            className="md:hidden text-gray-300 text-2xl"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
 
         {/* 🔻 Menu navigasi */}
         <ul
           className={`
             md:flex md:items-center md:gap-2.5
-            absolute md:static bg-white 
+            absolute md:static bg-slate-900/90 rounded-xl
             w-[90%] md:w-auto mx-auto md:mx-0
-            left-0 right-0 top-[64px] md:top-auto 
-            rounded-3xl shadow-md md:shadow-none 
-            transition-all duration-300 ease-in-out transform origin-top 
+            left-0 right-0 top-[64px] md:top-autoshadow-md md:shadow-none
+            transition-all duration-300 ease-in-out transform origin-top
             ${open
               ? "scale-y-100 opacity-100"
               : "scale-y-0 opacity-0 md:opacity-100 md:scale-y-100"}
@@ -68,8 +71,8 @@ const Navbar = () => {
                   font-medium transition-all duration-200
                   ${
                     isActive
-                      ? "text-red-600"
-                      : "text-gray-700 hover:text-red-600"
+                      ? "text-red-400"
+                      : "text-gray-300 hover:text-red-400"
                   }
                 `
                 }
@@ -82,8 +85,8 @@ const Navbar = () => {
               {/* 🔻 Underline animasi */}
               <span
                 className={`
-                  absolute bottom-0 left-0 w-0 h-[2px] bg-red-600 rounded-full 
-                  transition-all duration-300 ease-out 
+                  absolute bottom-0 left-0 w-0 h-[2px] bg-red-400 rounded-full
+                  transition-all duration-300 ease-out
                   group-hover:w-full
                 `}
               ></span>

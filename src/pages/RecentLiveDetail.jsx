@@ -121,7 +121,7 @@ export default function RecentLiveDetail() {
   const totalScreens = screenshots?.list?.length || 0;
 
   return (
-    <div className="text-gray-200 rounded-xl borderoverflow-hidden shadow-lg max-w-7xl mx-auto my-1">
+    <div className="text-gray-200 rounded-xl borderoverflow-hidden max-w-7xl mx-auto my-1">
       <div
         className="h-48 bg-cover bg-center relative rounded-t-xl"
         style={{ backgroundImage: `url(${banner})` }}
@@ -141,7 +141,7 @@ export default function RecentLiveDetail() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {totalScreens > 0 && (
-            <div className="relative bg-white p-2 rounded-lg border place-content-center max-h-150">
+            <div className="relative bg-slate-900 p-2 rounded-lg border border-gray-700 place-content-center max-h-150">
               <button
                 onClick={() => {
                   isInteracting.current = true;
@@ -213,37 +213,37 @@ export default function RecentLiveDetail() {
           )}
 
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-3 rounded-md border">
-                <p className="text-xs text-black font-semibold">Total Gift</p>
+              <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
+                <p className="text-xs text-gray-200 font-semibold">Total Gift</p>
                 <p className="font-semibold text-red-400">
                   {giftTotal.toLocaleString("id-ID")} Gold
                 </p>
               </div>
-              <div className="bg-white p-3 rounded-md border">
-                <p className="text-xs text-black font-semibold">Viewers</p>
-                <p className="font-semibold text-black">
+              <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
+                <p className="text-xs text-gray-200 font-semibold">Viewers</p>
+                <p className="font-semibold text-gray-200">
                   {viewers.toLocaleString("id-ID")}
                 </p>
               </div>
             </div>
 
-            <div className="bg-white p-3 rounded-md ">
-              <p className="text-xs text-black font-semibold">📆 Date</p>
-              <p className="font-semibold text-black">{endDate}</p>
+            <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
+              <p className="text-xs text-gray-200 font-semibold">📆 Date</p>
+              <p className="font-semibold text-gray-200">{endDate}</p>
             </div>
 
-            <div className="bg-white p-3 rounded-md border">
-              <p className="text-sm text-black font-semibold py-1">
+            <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
+              <p className="text-sm text-gray-200 font-semibold py-1">
                 🎁 Gift List
               </p>
               <ul className="space-y-2 text-xs max-h-150 overflow-y-auto custom-scrollbar">
                 {gift.slice(0, 200).map((g, idx) => (
                   <li
                     key={idx}
-                    className="flex items-center justify-between bg-gray-300 px-2 py-1 rounded"
+                    className="flex items-center justify-between bg-gray-700 px-2 py-1 rounded"
                   >
-                    <span className="flex items-center gap-2 text-black font-semibold">
+                    <span className="flex items-center gap-2 text-gray-200 font-semibold">
                       {g.img && (
                         <img
                           src={g.img}
@@ -253,11 +253,11 @@ export default function RecentLiveDetail() {
                       )}
                       {g.name}
                     </span>
-                    <span className="text-black">{g.num}x</span>
+                    <span className="text-gray-200">{g.num}x</span>
                   </li>
                 ))}
                 {gift.length === 0 && (
-                  <p className="text-black italic">Belum ada gift</p>
+                  <p className="text-gray-400 italic">Belum ada gift</p>
                 )}
               </ul>
             </div>

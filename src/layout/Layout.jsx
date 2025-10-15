@@ -3,16 +3,18 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Layout = () => {
   const location = useLocation();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
   return (
-    <div className="flex flex-col min-h-dvh transition-colors duration-500">
+    <div className={`flex flex-col min-h-dvh transition-colors duration-500 ${isDark ? 'dark' : ''}`}>
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main

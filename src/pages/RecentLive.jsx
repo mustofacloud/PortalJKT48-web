@@ -62,7 +62,7 @@ export default function RecentLive() {
     <div className="max-w-7xl mx-auto py-1 text-gray-800">
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl font-bold text-white">
+        <h2 className="text-2xl font-bold text-gray-100">
           🎥 Live Terbaru
         </h2>
       </div>
@@ -100,7 +100,7 @@ export default function RecentLive() {
               setSearch(e.target.value);
               setPage(1);
             }}
-            className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+            className="border border-gray-700 rounded-md px-3 py-2 text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-800 text-white"
           />
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function RecentLive() {
               {items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex flex-col md:flex-row bg-white border rounded-xl overflow-hidden hover:border-red-700 transition-colors duration-200"
+                  className="flex flex-col md:flex-row bg-gray-800 border border-gray-700 rounded-xl overflow-hidden hover:border-red-700 transition-colors duration-200"
                 >
                   <img
                     src={item.member?.img_alt || item.member?.img}
@@ -131,14 +131,14 @@ export default function RecentLive() {
 
                   <div className="flex-1 p-3 md:p-4 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-sm md:text-lg font-semibold text-gray-700 text-center md:text-left">
+                      <h3 className="text-sm md:text-lg font-semibold text-gray-200 text-center md:text-left">
                         {item.member?.nickname}
                       </h3>
                       <p className="text-xs md:text-sm text-red-400 mt-1 text-center md:text-left">
                         {item.idn?.title || "-"}
                       </p>
 
-                      <div className="mt-2 flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 text-xs text-gray-400">
+                      <div className="mt-2 flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 text-xs text-gray-500">
                         <span>
                           👥{" "}
                           {item.live_info?.viewers?.num?.toLocaleString("id-ID") ||
@@ -155,7 +155,7 @@ export default function RecentLive() {
                       </div>
                     </div>
 
-                    <div className="text-xs text-gray-500 mt-2 md:mt-3 text-center md:text-left">
+                    <div className="text-xs text-gray-400 mt-2 md:mt-3 text-center md:text-left">
                       {item.live_info?.date?.end
                         ? new Date(item.live_info.date.end).toLocaleString("id-ID", {
                             dateStyle: "medium",
@@ -181,17 +181,17 @@ export default function RecentLive() {
 
         {/* LIVE MEMBERS SIDEBAR */}
         <div className="hidden lg:block lg:w-80">
-          <h3 className="text-xl font-bold text-white mb-4">🔴 Member Sedang Live</h3>
+          <h3 className="text-xl font-bold text-gray-100 mb-4">🔴 Member Sedang Live</h3>
           {live.length > 0 ? (
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-3 bg-white p-1 rounded-xl">
+            <div className="grid md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-3 bg-gray-800 p-1 rounded-xl">
               {live.map((item, idx) => (
                 <LiveCard key={idx} live={item} />
               ))}
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-xl text-center">
-              <HiSignalSlash className="text-4xl text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-500 text-sm">Tidak ada member yang sedang live</p>
+            <div className="bg-gray-800 p-6 rounded-xl text-center">
+              <HiSignalSlash className="text-4xl text-gray-500 mx-auto mb-2" />
+              <p className="text-gray-400 text-sm">Tidak ada member yang sedang live</p>
             </div>
           )}
         </div>
@@ -204,7 +204,7 @@ export default function RecentLive() {
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             className={`px-3 py-1.5 text-sm rounded-md ${
               page === 1
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
             }`}
           >
@@ -227,7 +227,7 @@ export default function RecentLive() {
                     className={`px-3 py-1.5 rounded-md text-sm font-medium transition ${
                       page === p
                         ? "bg-red-400 text-white"
-                        : "bg-gray-100 text-gray-800 hover:bg-gray-200 cursor-pointer"
+                        : "bg-gray-700 text-gray-200 hover:bg-gray-600 cursor-pointer"
                     }`}
                   >
                     {p}
@@ -244,7 +244,7 @@ export default function RecentLive() {
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             className={`px-3 py-1.5 text-sm rounded-md ${
               page === totalPages
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
             }`}
           >

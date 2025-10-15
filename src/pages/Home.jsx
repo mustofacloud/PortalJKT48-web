@@ -66,11 +66,11 @@ export default function Home() {
           {!error && live.length > 0 ? (
             live.map((item, idx) => <LiveCard key={idx} live={item} />)
           ) : (
-            <div className="col-span-full flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+            <div className="col-span-full flex flex-col items-center text-center py-8 bg-slate-800 rounded-xl border border-slate-700">
               <span>
-                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
-              <p className="text-red-500 font-semibold">
+              <p className="text-red-400 font-semibold">
                 {error
                   ? "Gagal memuat data Live ⚠️"
                   : "Tidak ada member yang sedang live."}
@@ -90,11 +90,11 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+            <div className="flex flex-col items-center text-center py-8 bg-slate-800 rounded-xl border border-slate-700">
               <span>
-                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
-              <p className="text-red-500 font-semibold">
+              <p className="text-red-400 font-semibold">
                 {error
                   ? "Gagal memuat data ulang tahun ⚠️"
                   : "Tidak ada ulang tahun dalam waktu dekat."}
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-white ">📰 Berita Terbaru</h2>
+          <h2 className="text-2xl font-bold mb-4 text-white">📰 Berita Terbaru</h2>
 
           {!error && news.length > 0 ? (
             <div className="space-y-3">
@@ -113,11 +113,11 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8 bg-white/20 rounded-xl">
+            <div className="flex flex-col items-center text-center py-8 bg-slate-900 border border-slate-700 rounded-xl">
               <span>
-                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-white" />
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
-              <p className="text-red-500 font-semibold">
+              <p className="text-red-400 font-semibold">
                 {error
                   ? "Gagal memuat berita terbaru ⚠️"
                   : "Belum ada berita terbaru."}

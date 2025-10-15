@@ -25,7 +25,7 @@ export default function MemberCard({ data }) {
   if (!data) return null;
 
   const slug = makeSlug(data);
-  const name = data.nama_member || "Member Name";
+  const name = data.biodata?.namaPanggilan || "Member Name";
   const team = data.kategori || "";
   const img = data.ava_member || "https://placehold.co/300x400?text=Member";
 
@@ -35,8 +35,8 @@ export default function MemberCard({ data }) {
       state={{ member: data }}
       className="block"
     >
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col items-center p-3">
-        <div className="w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 bg-gray-200">
+      <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col items-center p-3">
+        <div className="w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 bg-slate-700">
           <img
             src={img}
             alt={name}
@@ -46,10 +46,10 @@ export default function MemberCard({ data }) {
         </div>
 
         <div className="text-center">
-          <h3 className="font-semibold text-gray-800 text-sm truncate">
+          <h3 className="font-semibold text-gray-100 text-sm truncate">
             {name}
           </h3>
-          <p className="text-xs text-gray-500">{team}</p>
+          <p className="text-xs text-gray-400">{team}</p>
         </div>
       </div>
     </Link>

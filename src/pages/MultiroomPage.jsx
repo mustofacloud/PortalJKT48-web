@@ -60,12 +60,12 @@ function LivePlayer({ live, onRemove }) {
 
   return (
     <div
-      className={`relative bg-black rounded-lg overflow-hidden aspect-[9/16] max-h-[60vh] 
+      className={`relative bg-black rounded-lg overflow-hidden aspect-[9/16] max-w-[50vh] max-h-[70vh] 
       ${removing ? "animate-fadeOut" : "animate-fadeIn"}`}
     >
       <video
         ref={videoRef}
-        className="w-full h-full object-contain"
+        className="w-full h-full object-cover"
         controls
         autoPlay
         muted
@@ -161,8 +161,8 @@ export default function MultiroomPage() {
   };
 
   return (
-    <div className="w-full min-h-screen text-white overflow-hidden rounded-xl bg-white/20">
-      <div className="flex flex-col md:flex-row gap-4 p-4">
+    <div className="w-full min-h-screen text-white overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-4 p-2">
         {/* Grid multiroom */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
@@ -203,7 +203,7 @@ export default function MultiroomPage() {
 
           {/* grid live */}
           <div
-            className="grid gap-4 place-items-stretch"
+            className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-4 place-items-stretch"
             style={{
               gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
               gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,

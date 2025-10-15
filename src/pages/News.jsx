@@ -47,7 +47,7 @@ export default function News() {
   return (
     <div className="w-full text-gray-800 min-h-screen py-1">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-8">
-        <h2 className="text-2xl font-bold text-white mb-6">
+        <h2 className="text-2xl font-bold text-gray-100 mb-6">
           📰 Berita Terbaru
         </h2>
 
@@ -59,7 +59,7 @@ export default function News() {
                 key={item.id}
                 to={`/news/${item.id}`}
                 state={{ news: item }}
-                className="block bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+                className="block bg-slate-900 border border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition"
               >
                 <div className="flex gap-3 items-start">
                   <img
@@ -68,10 +68,10 @@ export default function News() {
                     className="w-8 h-8 object-contain flex-shrink-0"
                   />
                   <div>
-                    <h3 className="font-semibold text-gray-800 text-sm sm:text-base leading-snug mb-1 line-clamp-3">
+                    <h3 className="font-semibold text-gray-200 text-sm sm:text-base leading-snug mb-1 line-clamp-3">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-gray-500">{date}</p>
+                    <p className="text-xs text-gray-400">{date}</p>
                   </div>
                 </div>
               </Link>
@@ -91,7 +91,7 @@ export default function News() {
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             className={`px-3 py-1.5 text-sm rounded-md ${
               page === 1
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
             }`}
           >
@@ -115,7 +115,7 @@ export default function News() {
                     className={`px-3 py-1.5 rounded-md text-sm font-medium transition ${
                       page === p
                         ? "bg-red-400 text-white"
-                        : "bg-gray-100 text-gray-800 hover:bg-gray-200 cursor-pointer"
+                        : "bg-gray-700 text-gray-200 hover:bg-gray-600 cursor-pointer"
                     }`}
                   >
                     {p}
@@ -132,7 +132,7 @@ export default function News() {
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             className={`px-3 py-1.5 text-sm rounded-md ${
               page === totalPages
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : "bg-red-400 text-white hover:bg-red-700 cursor-pointer"
             }`}
           >

@@ -11,7 +11,7 @@ export default function NewsCard({ data }) {
     <Link
       to={`/news/${data.id}`}
       state={{ news: data }}
-      className="block bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-red-500 transition"
+      className="block bg-slate-900 border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-red-500 transition"
     >
       <div className="flex gap-3 items-start">
         <img
@@ -20,7 +20,7 @@ export default function NewsCard({ data }) {
           className="w-8 h-8 object-contain"
         />
         <div>
-          <h3 className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2">
+          <h3 className="font-semibold text-white text-sm leading-snug line-clamp-2">
             {data.title}
           </h3>
           <p className="text-xs text-gray-500 mt-1">{date}</p>

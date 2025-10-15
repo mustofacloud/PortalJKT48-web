@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
-/* Hapus background langsung di #root, ubah jadi versi overlay */
+/* Clean background for light and dark modes */
 #root {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.pinimg.com/1200x/c0/10/76/c0107634fa7058b67293a79072ce71ce.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.dark #root {
+  background-color: #18223b;
 }
 
 html, body {
