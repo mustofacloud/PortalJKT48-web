@@ -9,7 +9,9 @@ export default function LiveCard({ live }) {
   if (!live) return null;
 
   const thumbnail =
-    live.img || live.thumbnails?.high?.url || live.thumbnails?.medium?.url;
+    live.type === "showroom"
+      ? live.img_alt || live.img || live.thumbnails?.high?.url || live.thumbnails?.medium?.url
+      : live.img || live.thumbnails?.high?.url || live.thumbnails?.medium?.url;
 
   const title = live.name || live.title || live.channelTitle || "Live Stream";
 
@@ -38,9 +40,9 @@ export default function LiveCard({ live }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className="group block bg-slate-900 rounded-lg p-2 flex flex-col w-full max-w-[140px] text-gray-200 hover:scale-[1.03] hover:border-red-700 transition-transform duration-200 border border-slate-700"
+      className="group block bg-slate-900 rounded-lg p-2 flex flex-col w-full max-w-[160px] text-gray-200 hover:scale-[1.03] hover:border-red-700 transition-transform duration-200 border border-slate-700"
     >
-      <div className="w-full aspect-[9/16] rounded-md overflow-hidden bg-black relative">
+      <div className="w-full aspect-[4/5] rounded-md overflow-hidden bg-black relative">
         <img
           src={thumbnail}
           alt={title}

@@ -13,6 +13,15 @@ const BASE = {
   memberDetail: (url) => `https://proxi-ten.vercel.app/api/member/${encodeURIComponent(url)}`,
 };
 
+// Additional API URLs for WatchLivePage
+export const API_URLS = {
+  LIVE_URL: "https://api.crstlnz.my.id/api/now_live?group=jkt48&debug=false",
+  IDN_PROXY: "https://jkt48showroom-api.my.id/proxy?url=",
+  IDN_ONLIVES: "https://api-idn.vercel.app/api/onlives",
+  SHOWROOM_GIFTS: (roomIdShowroom) => `https://sorum-mobile.vercel.app/api/lives/gift/${roomIdShowroom}/gift`,
+  IDN_TOP_GIFTERS: (uuidStreamer) => `https://api.idn.app/api/v1/gift/livestream/top-gifter/daily?type=daily&uuid_streamer=${uuidStreamer}&n=1`,
+};
+
 
 export async function fetchLive() {
   const res = await axios.get(BASE.live);
@@ -82,4 +91,26 @@ export async function fetchMemberDetail(url) {
     console.error("❌ Fetch Member Detail Error:", err);
     return null;
   }
+}
+
+// Additional API functions for WatchLivePage
+export async function fetchIdnOnlives() {
+  const res = await axios.get(API_URLS.IDN_ONLIVES);
+  return res.data;
+}
+
+export async function fetchShowroomGifts(roomId) {
+  if (!roomId) return [];
+  const res = await axios.get(API_URLS.SHOWROOM_GIFTS(roomId));
+  return res.data;
+}
+
+export async function fetchIdnTopGifters(uuid) {
+  if (!uuid) return { status: 0, data: [] };
+  const res = await axios.get(API_URLS.IDN_TOP_GIFTERS(uuid), {
+    headers: {
+      "X-API-KEY": "123f4c4e-6ce1-404d-8786-d17e46d65b5c"
+    }
+  });
+  return res.data;
 }

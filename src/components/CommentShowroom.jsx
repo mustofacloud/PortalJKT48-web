@@ -10,11 +10,11 @@ export default function CommentShowroom({ showroom, onNewMessage }) {
     if (!showroom || !active.current) return;
     try {
       const res = await fetch(
-        `https://comment-log.vercel.app/comment?room_id=${showroom}`
+        `https://sorum-mobile.vercel.app/api/lives/comments/${showroom}/comment`
       );
       const json = await res.json();
-      if (Array.isArray(json.comment_log)) {
-        const newC = json.comment_log.filter(
+      if (Array.isArray(json)) {
+        const newC = json.filter(
           (c) => !fetchedIds.current.has(c.created_at)
         );
         newC.forEach((c) => fetchedIds.current.add(c.created_at));
@@ -32,7 +32,7 @@ export default function CommentShowroom({ showroom, onNewMessage }) {
       requestAnimationFrame(fetchComments);
     } catch (e) {
       console.warn("❌ Gagal fetch showroom chat:", e);
-      setTimeout(fetchComments, 1000);
+      setTimeout(fetchComments, 5000);
     }
   };
 

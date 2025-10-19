@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Hls from "hls.js";
-import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, PictureInPicture } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, PictureInPicture, Settings } from "lucide-react";
 import CommentIDN from "../components/CommentIDN";
 import CommentShowroom from "../components/CommentShowroom";
 import LiveCard from "../components/LiveCard";
-
-import showroomLogo from "../assets/showroom.png";
-import idnLogo from "../assets/idn.png";
-
-const LIVE_URL =
-  "https://api.crstlnz.my.id/api/now_live?group=jkt48&debug=false";
-const IDN_PROXY = "https://jkt48showroom-api.my.id/proxy?url=";
+import { API_URLS, fetchIdnOnlives, fetchShowroomGifts, fetchIdnTopGifters } from "../utils/api/api.js";
 
 export default function WatchLivePage() {
   const { roomId } = useParams();
@@ -29,7 +23,7 @@ export default function WatchLivePage() {
   const [autoScroll, setAutoScroll] = useState(true);
   const [liveEnded, setLiveEnded] = useState(false);
   const [imgAlt, setImgAlt] = useState("");
-  const [showChat, setShowChat] = useState(true);
+  const [activeTab, setActiveTab] = useState('chat');
   const [otherLives, setOtherLives] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -39,10 +33,16 @@ export default function WatchLivePage() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const controlsTimeoutRef = useRef(null);
+  const [streamingUrlList, setStreamingUrlList] = useState([]);
+  const [selectedQuality, setSelectedQuality] = useState(null);
+  const [showQualitySelector, setShowQualitySelector] = useState(false);
+  const [recentGifts, setRecentGifts] = useState([]);
+  const [topGifters, setTopGifters] = useState([]);
+  const [uuidStreamer, setUuidStreamer] = useState("");
 
   const fetchLive = async () => {
     try {
-      const res = await fetch(LIVE_URL);
+      const res = await fetch(API_URLS.LIVE_URL);
       const data = await res.json();
       console.log("📡 All Lives:", data);
 
@@ -63,7 +63,7 @@ export default function WatchLivePage() {
 
       const isIDN = live.type === "idn";
       const finalUrl = isIDN
-        ? `${IDN_PROXY}${encodeURIComponent(stream)}`
+        ? `${API_URLS.IDN_PROXY}${encodeURIComponent(stream)}`
         : stream;
 
       console.log("🎞️ Stream URL:", finalUrl);
@@ -75,6 +75,7 @@ export default function WatchLivePage() {
       setChatId(live.chat_room_id || "");
       setRoomIdShowroom(live.room_id || null);
       setImgAlt(live.img_alt || live.image || "");
+      setStreamingUrlList(live.streaming_url_list || []);
 
       const others = data.filter((item) => item.url_key !== roomId);
       setOtherLives(others);
@@ -83,11 +84,85 @@ export default function WatchLivePage() {
     }
   };
 
+  const fetchGifts = async () => {
+    if (type !== "showroom" || !roomIdShowroom) return;
+    try {
+      const data = await fetchShowroomGifts(roomIdShowroom);
+      console.log("✅ Fetched gifts:", data);
+      setRecentGifts(data);
+    } catch (err) {
+      console.error("❌ Error fetch gifts:", err);
+    }
+  };
+
+  const fetchUuid = async (username) => {
+    try {
+      console.log("🔍 Fetching UUID for username:", username);
+      const data = await fetchIdnOnlives();
+
+      // Try to match by name first (remove "JKT48" suffix if present)
+      let live = data.find(item => item.user.name === username);
+      if (!live) {
+        // Try to match by name without "JKT48" suffix
+        live = data.find(item => item.user.name.replace(' JKT48', '') === username);
+      }
+      if (!live) {
+        // Try to match by username field
+        live = data.find(item => item.user.username === username);
+      }
+
+      if (live) {
+        console.log("✅ Found UUID:", live.user.id, "for username:", username);
+        setUuidStreamer(live.user.id);
+      } else {
+        console.warn("⚠️ UUID not found for username:", username);
+        console.log("Available names in API:", data.map(item => item.user.name));
+        console.log("Available usernames in API:", data.map(item => item.user.username));
+      }
+    } catch (err) {
+      console.error("❌ Error fetch UUID:", err);
+    }
+  };
+
+  const fetchTopGifters = async () => {
+    if (!uuidStreamer) return;
+    try {
+      const data = await fetchIdnTopGifters(uuidStreamer);
+      console.log("✅ Fetched top gifters:", data);
+      setTopGifters(data.data || []);
+    } catch (err) {
+      console.error("❌ Error fetch top gifters:", err);
+      setTopGifters([]);
+    }
+  };
+
   useEffect(() => {
     fetchLive();
     const interval = setInterval(fetchLive, 15000);
     return () => clearInterval(interval);
   }, [roomId]);
+
+  useEffect(() => {
+    if (type === "showroom" && roomIdShowroom) {
+      fetchGifts();
+      const interval = setInterval(fetchGifts, 15000);
+      return () => clearInterval(interval);
+    }
+  }, [type, roomIdShowroom]);
+
+  useEffect(() => {
+    if (type === "idn" && username) {
+      fetchUuid(username);
+    }
+  }, [type, username]);
+
+  useEffect(() => {
+    if (type === "idn" && uuidStreamer) {
+      fetchTopGifters();
+      const interval = setInterval(fetchTopGifters, 15000);
+      return () => clearInterval(interval);
+    }
+  }, [type, uuidStreamer]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -184,6 +259,18 @@ export default function WatchLivePage() {
   }, [messages]);
 
   const handleNewMessage = (msg) => setMessages((prev) => [...prev, msg]);
+
+  const handleQualityChange = (quality) => {
+    const selected = streamingUrlList.find((item) => item.quality === quality);
+    if (selected) {
+      setSelectedQuality(quality);
+      const isIDN = type === "idn";
+      const finalUrl = isIDN
+        ? `${API_URLS.IDN_PROXY}${encodeURIComponent(selected.url)}`
+        : selected.url;
+      setStreamUrl(finalUrl);
+    }
+  };
 
   const togglePlayPause = () => {
     const video = videoRef.current;
@@ -293,13 +380,6 @@ export default function WatchLivePage() {
             playsInline
             onClick={handleClick}
           />
-          <div className="absolute top-3 right-3 px-2 py-1 rounded flex items-center gap-2">
-            <img
-              src={type === "idn" ? idnLogo : showroomLogo}
-              alt="logo"
-              className="w-10 h-10 object-contain"
-            />
-          </div>
 
           {/* Custom Controls */}
           <div className={`absolute bottom-0 left-0 right-0 bg-black/70 p-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
@@ -352,6 +432,36 @@ export default function WatchLivePage() {
               </div>
 
               <div className="flex items-center gap-4">
+                {/* Quality Selector for Showroom */}
+                {type === "showroom" && streamingUrlList.length > 0 && (
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowQualitySelector(!showQualitySelector)}
+                      className="text-white hover:text-red-500 transition-colors cursor-pointer"
+                    >
+                      <Settings size={20} />
+                    </button>
+                    {showQualitySelector && (
+                      <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-xs rounded shadow-lg z-10">
+                        {streamingUrlList.map((item) => (
+                          <button
+                            key={item.quality}
+                            onClick={() => {
+                              handleQualityChange(item.quality);
+                              setShowQualitySelector(false);
+                            }}
+                            className={`block w-full text-left px-3 py-1 hover:bg-gray-700 ${
+                              selectedQuality === item.quality ? 'bg-red-600' : ''
+                            }`}
+                          >
+                            {item.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Picture in Picture */}
                 <button
                   onClick={togglePictureInPicture}
@@ -408,21 +518,33 @@ export default function WatchLivePage() {
           <div className="flex">
             <button
               className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
-                showChat
+                activeTab === 'chat'
                   ? "bg-red-600 text-white"
                   : "bg-transparent text-gray-400 hover:text-white"
               }`}
-              onClick={() => setShowChat(true)}
+              onClick={() => setActiveTab('chat')}
             >
               💬 Chat
             </button>
+            {(type === "showroom" || type === "idn") && (
+              <button
+                className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
+                  activeTab === 'gifts'
+                    ? "bg-red-600 text-white"
+                    : "bg-transparent text-gray-400 hover:text-white"
+                }`}
+                onClick={() => setActiveTab('gifts')}
+              >
+                {type === "idn" ? "🏆 Top Gifter" : "🎁 Gifts"}
+              </button>
+            )}
             <button
               className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
-                !showChat
+                activeTab === 'other'
                   ? "bg-red-600 text-white"
                   : "bg-transparent text-gray-400 hover:text-white"
               }`}
-              onClick={() => setShowChat(false)}
+              onClick={() => setActiveTab('other')}
             >
               📺 Live Lainnya
             </button>
@@ -433,7 +555,7 @@ export default function WatchLivePage() {
             onScroll={handleScroll}
             className="flex-1 overflow-y-auto p-3 text-sm"
           >
-            {showChat ? (
+            {activeTab === 'chat' ? (
               <>
                 {type === "idn" && chatId ? (
                   <CommentIDN
@@ -453,6 +575,40 @@ export default function WatchLivePage() {
                   </div>
                 )}
               </>
+            ) : activeTab === 'gifts' ? (
+              type === "showroom" ? (
+                recentGifts.length > 0 ? (
+                  <div className="space-y-2">
+                    {recentGifts.slice(0, 8).map((gift, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm bg-gray-800 p-2 rounded">
+                        <img src={gift.image} alt="gift" className="w-10 h-10" />
+                        <span className="font-semibold text-red-400">{gift.name}</span>
+                        <span className="text-yellow-400">x{gift.num}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-gray-400 text-center mt-5">
+                    🎁 Tidak ada gift terbaru
+                  </div>
+                )
+              ) : type === "idn" ? (
+                topGifters.length > 0 ? (
+                  <div className="space-y-2">
+                    {topGifters.map((gifter, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm bg-gray-800 p-2 rounded">
+                        <img src={gifter.image_url} alt="avatar" className="w-10 h-10 rounded-full" />
+                        <span className="font-semibold text-red-400">{gifter.name}</span>
+                        <span className="text-yellow-400">{gifter.total_gold} Gold</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-gray-400 text-center mt-5">
+                    🏆 Tidak ada top gifter
+                  </div>
+                )
+              ) : null
             ) : otherLives.length > 0 ? (
               <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-1 place-conten-center">
                 {otherLives.map((item) => (
