@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaYoutube } from "react-icons/fa";
+import { useTheme } from "../contexts/ThemeContext";
 
 import idnLogo from "../assets/idn.png";
 import showroomLogo from "../assets/showroom.png";
 
 export default function LiveCard({ live }) {
+  const { isDark } = useTheme();
+
   if (!live) return null;
 
   const thumbnail =
@@ -40,7 +43,11 @@ export default function LiveCard({ live }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className="group block bg-slate-900 rounded-lg p-2 flex flex-col w-full max-w-[160px] text-gray-200 hover:scale-[1.03] hover:border-red-700 transition-transform duration-200 border border-slate-700"
+      className={`group block rounded-lg p-2 flex flex-col w-full max-w-[160px] hover:scale-[1.03] transition-transform duration-200 border ${
+        isDark
+          ? 'bg-slate-900 text-gray-200 hover:border-red-700 border-slate-700'
+          : 'bg-white text-gray-800 hover:border-red-500 border-gray-300 shadow-md'
+      }`}
     >
       <div className="w-full aspect-[4/5] rounded-md overflow-hidden bg-black relative">
         <img
@@ -52,12 +59,18 @@ export default function LiveCard({ live }) {
       </div>
 
       <div className="mt-2 flex-1">
-        <h4 className="font-semibold text-[12px] truncate text-gray-100 group-hover:text-red-400 transition">
+        <h4 className={`font-semibold text-[12px] truncate transition ${
+          isDark
+            ? 'text-gray-100 group-hover:text-red-400'
+            : 'text-gray-800 group-hover:text-red-600'
+        }`}>
           {title}
         </h4>
 
         {startedAt && (
-          <p className="text-[10px] text-gray-400">Mulai: {startedAt}</p>
+          <p className={`text-[10px] ${
+            isDark ? 'text-gray-400' : 'text-gray-600'
+          }`}>Mulai: {startedAt}</p>
         )}
 
         <div className="mt-1 flex items-center gap-1">

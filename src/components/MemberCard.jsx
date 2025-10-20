@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 
 /**
  * Membuat slug berdasarkan data member:
@@ -22,6 +23,8 @@ function makeSlug(data) {
 }
 
 export default function MemberCard({ data }) {
+  const { isDark } = useTheme();
+
   if (!data) return null;
 
   const slug = makeSlug(data);
@@ -35,8 +38,14 @@ export default function MemberCard({ data }) {
       state={{ member: data }}
       className="block"
     >
-      <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col items-center p-3">
-        <div className="w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 bg-slate-700">
+      <div className={`border rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col items-center p-3 ${
+        isDark
+          ? 'bg-slate-900 border-slate-700'
+          : 'bg-white border-gray-300'
+      }`}>
+        <div className={`w-full aspect-[3/4] rounded-lg overflow-hidden mb-3 ${
+          isDark ? 'bg-slate-700' : 'bg-gray-200'
+        }`}>
           <img
             src={img}
             alt={name}
@@ -46,10 +55,14 @@ export default function MemberCard({ data }) {
         </div>
 
         <div className="text-center">
-          <h3 className="font-semibold text-gray-100 text-sm truncate">
+          <h3 className={`font-semibold text-sm truncate ${
+            isDark ? 'text-gray-100' : 'text-gray-800'
+          }`}>
             {name}
           </h3>
-          <p className="text-xs text-gray-400">{team}</p>
+          <p className={`text-xs ${
+            isDark ? 'text-gray-400' : 'text-gray-600'
+          }`}>{team}</p>
         </div>
       </div>
     </Link>

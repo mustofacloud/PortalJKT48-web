@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import { fetchNews } from "../utils/api/api";
@@ -8,10 +9,12 @@ import SkeletonLoader from "../utils/SkeletonLoader"
 dayjs.locale("id");
 
 export default function News() {
+  const { isDark } = useTheme();
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   const totalNews = 1752;
   const perPage = 10;
@@ -21,7 +24,7 @@ export default function News() {
     async function loadNews() {
       setLoading(true);
       try {
-        const data = await fetchNews(page, perPage);
+        const data = await fetchNews(page, perPage, search);
         setNewsList(data?.news || []);
         setError(false);
       } catch (err) {
@@ -33,7 +36,12 @@ export default function News() {
     }
     loadNews();
     window.scrollTo(0, 0);
-  }, [page]);
+  }, [page, search]);
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setPage(1); // Reset to first page when searching
+  };
 
   if (loading) return <SkeletonLoader type="news" />;
 
@@ -47,9 +55,25 @@ export default function News() {
   return (
     <div className="w-full text-gray-800 min-h-screen py-1">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-8">
-        <h2 className="text-2xl font-bold text-gray-100 mb-6">
+        <h2 className={`text-2xl font-bold mb-6 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>
           📰 Berita Terbaru
         </h2>
+
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Cari berita..."
+            value={search}
+            onChange={handleSearchChange}
+            className={`w-full max-w-md px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 ${
+              isDark
+                ? 'bg-slate-800 border-slate-600 text-white placeholder-gray-400'
+                : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+            }`}
+          />
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3">
           {newsList.map((item) => {
@@ -59,7 +83,11 @@ export default function News() {
                 key={item.id}
                 to={`/news/${item.id}`}
                 state={{ news: item }}
-                className="block bg-slate-900 border border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+                className={`block border rounded-xl p-4 shadow-sm hover:shadow-md transition ${
+                  isDark
+                    ? 'bg-slate-900 border-slate-700'
+                    : 'bg-white border-gray-300'
+                }`}
               >
                 <div className="flex gap-3 items-start">
                   <img
@@ -68,7 +96,9 @@ export default function News() {
                     className="w-8 h-8 object-contain flex-shrink-0"
                   />
                   <div>
-                    <h3 className="font-semibold text-gray-200 text-sm sm:text-base leading-snug mb-1 line-clamp-3">
+                    <h3 className={`font-semibold text-sm sm:text-base leading-snug mb-1 line-clamp-3 ${
+                      isDark ? 'text-gray-200' : 'text-gray-900'
+                    }`}>
                       {item.title}
                     </h3>
                     <p className="text-xs text-gray-400">{date}</p>

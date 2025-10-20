@@ -10,6 +10,19 @@
   background-color: #18223b;
 }
 
+/* Light mode scrollbar */
+.light ::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: #9c9c9c;
+  border-radius: 4px;
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
 html, body {
   overscroll-behavior-y: none;
   touch-action: manipulation;

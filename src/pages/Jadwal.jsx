@@ -1,11 +1,13 @@
 // src/pages/Jadwal.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import { fetchJadwal } from "../utils/api/api";
 import TheaterCard from "../components/TheaterCard";
 import SkeletonLoader from "../utils/SkeletonLoader"
 
 export default function Jadwal() {
+  const { isDark } = useTheme();
   const [upcoming, setUpcoming] = useState([]);
   const [recent, setRecent] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,9 +32,13 @@ export default function Jadwal() {
   if (loading) return <SkeletonLoader type="jadwal" />;
 
   return (
-    <div className="max-w-7xl mx-auto px-2 py-1 space-y-10">
+    <div className={`max-w-7xl mx-auto px-2 py-1 space-y-10 ${
+      isDark ? 'text-gray-200' : 'text-gray-800'
+    }`}>
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-gray-100">🎟️ Jadwal Mendatang</h2>
+        <h2 className={`text-2xl font-bold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>🎟️ Jadwal Mendatang</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {upcoming.length > 0 ? (
             upcoming.map((item) => (
@@ -47,7 +53,9 @@ export default function Jadwal() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-gray-100">🕓 Jadwal Terbaru</h2>
+        <h2 className={`text-2xl font-bold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>🕓 Jadwal Terbaru</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 gap-5">
           {recent.length > 0 ? (
             recent.map((item) => (

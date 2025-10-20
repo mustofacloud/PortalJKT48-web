@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import { fetchRecentDetail } from "../utils/api/api";
 
 export default function RecentLiveDetail() {
+  const { isDark } = useTheme();
   const { id } = useParams();
   const [history, setHistory] = useState(null);
   const [gift, setGift] = useState([]);
@@ -121,7 +123,9 @@ export default function RecentLiveDetail() {
   const totalScreens = screenshots?.list?.length || 0;
 
   return (
-    <div className="text-gray-200 rounded-xl borderoverflow-hidden max-w-7xl mx-auto my-1">
+    <div className={`text-gray-200 rounded-xl borderoverflow-hidden max-w-7xl mx-auto my-1 ${
+      isDark ? 'text-gray-200' : 'text-gray-800'
+    }`}>
       <div
         className="h-48 bg-cover bg-center relative rounded-t-xl"
         style={{ backgroundImage: `url(${banner})` }}
@@ -141,7 +145,11 @@ export default function RecentLiveDetail() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {totalScreens > 0 && (
-            <div className="relative bg-slate-900 p-2 rounded-lg border border-gray-700 place-content-center max-h-150">
+            <div className={`relative p-2 rounded-lg border place-content-center max-h-150 ${
+              isDark
+                ? 'bg-slate-900 border-gray-700'
+                : 'bg-white border-gray-300'
+            }`}>
               <button
                 onClick={() => {
                   isInteracting.current = true;
@@ -214,36 +222,68 @@ export default function RecentLiveDetail() {
 
           <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-              <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
-                <p className="text-xs text-gray-200 font-semibold">Total Gift</p>
+              <div className={`p-3 rounded-md border ${
+                isDark
+                  ? 'bg-slate-900 border-gray-700'
+                  : 'bg-white border-gray-300'
+              }`}>
+                <p className={`text-xs font-semibold ${
+                  isDark ? 'text-gray-200' : 'text-gray-800'
+                }`}>Total Gift</p>
                 <p className="font-semibold text-red-400">
                   {giftTotal.toLocaleString("id-ID")} Gold
                 </p>
               </div>
-              <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
-                <p className="text-xs text-gray-200 font-semibold">Viewers</p>
-                <p className="font-semibold text-gray-200">
+              <div className={`p-3 rounded-md border ${
+                isDark
+                  ? 'bg-slate-900 border-gray-700'
+                  : 'bg-white border-gray-300'
+              }`}>
+                <p className={`text-xs font-semibold ${
+                  isDark ? 'text-gray-200' : 'text-gray-800'
+                }`}>Viewers</p>
+                <p className={`font-semibold ${
+                  isDark ? 'text-gray-200' : 'text-gray-800'
+                }`}>
                   {viewers.toLocaleString("id-ID")}
                 </p>
               </div>
             </div>
 
-            <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
-              <p className="text-xs text-gray-200 font-semibold">📆 Date</p>
-              <p className="font-semibold text-gray-200">{endDate}</p>
+            <div className={`p-3 rounded-md border ${
+              isDark
+                ? 'bg-slate-900 border-gray-700'
+                : 'bg-white border-gray-300'
+            }`}>
+              <p className={`text-xs font-semibold ${
+                isDark ? 'text-gray-200' : 'text-gray-800'
+              }`}>📆 Date</p>
+              <p className={`font-semibold ${
+                isDark ? 'text-gray-200' : 'text-gray-800'
+              }`}>{endDate}</p>
             </div>
 
-            <div className="bg-slate-900 p-3 rounded-md border border-gray-700">
-              <p className="text-sm text-gray-200 font-semibold py-1">
+            <div className={`p-3 rounded-md border ${
+              isDark
+                ? 'bg-slate-900 border-gray-700'
+                : 'bg-white border-gray-300'
+            }`}>
+              <p className={`text-sm font-semibold py-1 ${
+                isDark ? 'text-gray-200' : 'text-gray-800'
+              }`}>
                 🎁 Gift List
               </p>
               <ul className="space-y-2 text-xs max-h-150 overflow-y-auto custom-scrollbar">
                 {gift.slice(0, 200).map((g, idx) => (
                   <li
                     key={idx}
-                    className="flex items-center justify-between bg-gray-700 px-2 py-1 rounded"
+                    className={`flex items-center justify-between px-2 py-1 rounded ${
+                      isDark ? 'bg-gray-700' : 'bg-gray-200'
+                    }`}
                   >
-                    <span className="flex items-center gap-2 text-gray-200 font-semibold">
+                    <span className={`flex items-center gap-2 font-semibold ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
                       {g.img && (
                         <img
                           src={g.img}
@@ -253,11 +293,15 @@ export default function RecentLiveDetail() {
                       )}
                       {g.name}
                     </span>
-                    <span className="text-gray-200">{g.num}x</span>
+                    <span className={`${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>{g.num}x</span>
                   </li>
                 ))}
                 {gift.length === 0 && (
-                  <p className="text-gray-400 italic">Belum ada gift</p>
+                  <p className={`italic ${
+                    isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}>Belum ada gift</p>
                 )}
               </ul>
             </div>

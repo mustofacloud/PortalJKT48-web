@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import { fetchNewsDetail } from "../utils/api/api";
@@ -7,6 +8,7 @@ import { fetchNewsDetail } from "../utils/api/api";
 dayjs.locale("id");
 
 export default function NewsDetail() {
+  const { isDark } = useTheme();
   const { id } = useParams();
   const location = useLocation();
   const stateNews = location.state?.news || null;
@@ -76,33 +78,36 @@ export default function NewsDetail() {
   const contentHTML = { __html: news.content };
 
   return (
-    <div className="w-full bg-slate-900 text-gray-200 rounded-lg min-h-screen">
-      <div className="px-4 sm:px-6 md:px-8 lg:px-12 py-4">
-        <Link
-          to="/news"
-          className="inline-block mb-4 text-sm text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md transition"
-        >
-          ← Kembali
-        </Link>
-      </div>
+    <div className={`w-full rounded-lg min-h-screen ${
+      isDark ? 'bg-slate-900 text-gray-200' : 'bg-white text-gray-800'
+    }`}>
 
       <div
-        className="bg-slate-800 border-t border-slate-700 rounded-lg shadow-sm
-                      px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-10 w-full"
+        className={`${
+          isDark
+            ? 'bg-slate-800 border-slate-700'
+            : 'bg-white border-gray-300'
+        } border-t rounded-lg shadow-sm px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-10 w-full`}
       >
         <div className="flex items-start gap-3 mb-4">
           <div>
-            <h1 className="font-bold text-xl sm:text-2xl text-gray-100 mb-1 leading-snug">
+            <h1 className={`font-bold text-xl sm:text-2xl mb-1 leading-snug ${
+              isDark ? 'text-gray-100' : 'text-gray-900'
+            }`}>
               {news.title}
             </h1>
-            <p className="text-sm text-gray-400">{date}</p>
+            <p className={`text-sm ${
+              isDark ? 'text-white' : 'text-gray-600'
+            }`}>{date}</p>
           </div>
         </div>
 
         <div
-          className="prose prose-sm sm:prose-base max-w-none leading-relaxed
+          className={`prose prose-sm sm:prose-base max-w-none leading-relaxed
                      prose-img:rounded-lg prose-img:mx-auto prose-img:my-4
-                     prose-p:my-2 prose-headings:text-red-400"
+                     prose-p:my-2 ${
+            isDark ? 'prose-headings:text-red-400' : 'prose-headings:text-red-600'
+          }`}
           dangerouslySetInnerHTML={contentHTML}
         />
       </div>

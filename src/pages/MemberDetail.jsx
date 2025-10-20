@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import { fetchMemberDetail } from "../utils/api/api";
 import {
   Video,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react"; // icon lucide-react
 
 export default function MemberDetail() {
+  const { isDark } = useTheme();
   const { url } = useParams();
   const location = useLocation();
   const stateMember = location.state?.member || null;
@@ -115,17 +117,9 @@ export default function MemberDetail() {
     : "Belum ada data";
 
   return (
-    <div className="text-gray-200 rounded-xl overflow-hidden shadow-lg max-w-7xl mx-auto my-1">
-      {/* Tombol Kembali */}
-      <div className="p-1">
-        <Link
-          to="/member"
-          className="bg-gray-700 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-600"
-        >
-          ← Kembali
-        </Link>
-      </div>
-
+    <div className={`rounded-xl overflow-hidden shadow-lg max-w-7xl mx-auto my-1 ${
+      isDark ? 'text-gray-200' : 'text-gray-900'
+    }`}>
       {/* Header: Avatar & Jikosokai */}
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between px-6 gap-6 md:gap-10">
         {/* Avatar & Info */}
@@ -133,11 +127,17 @@ export default function MemberDetail() {
           <img
             src={img_alt || img}
             alt={name}
-            className="w-32 h-40 md:w-40 md:h-52 object-cover rounded-md border-4 border-gray-700 shadow-md"
+            className={`w-32 h-40 md:w-40 md:h-52 object-cover rounded-md shadow-md ${
+              isDark ? 'border-4 border-gray-700' : 'border-4 border-gray-300'
+            }`}
           />
           <div>
-            <h2 className="text-2xl font-bold text-gray-100">{name}</h2>
-            <p className="text-sm text-gray-400">{nickname}</p>
+            <h2 className={`text-2xl font-bold ${
+              isDark ? 'text-gray-100' : 'text-gray-900'
+            }`}>{name}</h2>
+            <p className={`text-sm ${
+              isDark ? 'text-gray-400' : 'text-gray-600'
+            }`}>{nickname}</p>
             <p className="text-xs text-red-400 mt-1">
               {generation?.toUpperCase()} •{" "}
               {is_graduate ? "Graduated Member" : "Active Member"}
@@ -147,7 +147,9 @@ export default function MemberDetail() {
 
         {/* Jikosokai */}
         {jikosokai && (
-          <div className="bg-gray-800 p-4 rounded-md md:w-1/2 text-center md:text-left border border-gray-700">
+          <div className={`p-4 rounded-md md:w-1/2 text-center md:text-left ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
+          }`}>
             <p className="italic text-red-400 font-semibold">"{jikosokai}"</p>
           </div>
         )}
@@ -157,52 +159,70 @@ export default function MemberDetail() {
       <div className="pt-3 px-6 pb-8">
         {/* Informasi pribadi & deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gray-800 p-4 rounded-md space-y-1 border border-gray-700">
+          <div className={`p-4 rounded-md space-y-1 ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
+          }`}>
             <h3 className="font-semibold text-lg text-red-400 flex items-center gap-2">
               <User className="w-5 h-5 text-red-400" /> Informasi Pribadi
             </h3>
-            <p>
+            <p className={isDark ? 'text-gray-200' : 'text-gray-900'}>
               <span className="text-gray-400">📅 Tanggal Lahir:</span> {birth}
             </p>
-            <p>
+            <p className={isDark ? 'text-gray-200' : 'text-gray-900'}>
               <span className="text-gray-400">📏 Tinggi Badan:</span> {height}
             </p>
-            <p>
+            <p className={isDark ? 'text-gray-200' : 'text-gray-900'}>
               <span className="text-gray-400">🎓 Status:</span>{" "}
               {is_graduate ? "Lulus" : "Aktif"}
             </p>
           </div>
 
-          <div className="bg-gray-800 p-4 rounded-md border border-gray-700">
+          <div className={`p-4 rounded-md ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
+          }`}>
             <h3 className="font-semibold text-lg text-red-400 mb-1 flex items-center gap-2">
               <Activity className="w-5 h-5 text-red-400" /> Deskripsi
             </h3>
-            <pre className="whitespace-pre-wrap text-sm text-gray-300">
+            <pre className={`whitespace-pre-wrap text-sm ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               {description}
             </pre>
           </div>
         </div>
 
         {/* Statistik */}
-        <div className="mt-3 bg-gray-800 p-4 rounded-md border border-gray-700">
+        <div className={`mt-3 p-4 rounded-md ${
+          isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
+        }`}>
           <h3 className="font-semibold text-lg text-red-400 mb-3 flex items-center gap-2">
             <BarChart2 className="w-5 h-5 text-red-400" /> Statistik Live
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* ✅ Total Live (Showroom & IDN dalam 1 box) */}
-            <div className="bg-gray-700 rounded-md p-3 text-center border border-gray-600">
-              <p className="text-gray-200 text-xs flex justify-center items-center gap-1 mb-1">
+            <div className={`rounded-md p-3 text-center ${
+              isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
+            }`}>
+              <p className={`text-xs flex justify-center items-center gap-1 mb-1 ${
+                isDark ? 'text-gray-200' : 'text-gray-700'
+              }`}>
                 <Video className="w-4 h-4" /> Total Live
               </p>
-              <div className="text-gray-100 font-semibold text-sm space-y-0.5">
+              <div className={`font-semibold text-sm space-y-0.5 ${
+                isDark ? 'text-gray-100' : 'text-gray-900'
+              }`}>
                 <p>🎥 Showroom: {totalShowroom}</p>
                 <p>📺 IDN Live: {totalIDN}</p>
               </div>
             </div>
 
             {/* Gift Tertinggi */}
-            <div className="bg-gray-700 rounded-md p-3 text-center border border-gray-600">
-              <p className="text-gray-200 text-xs flex justify-center items-center gap-1">
+            <div className={`rounded-md p-3 text-center ${
+              isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
+            }`}>
+              <p className={`text-xs flex justify-center items-center gap-1 ${
+                isDark ? 'text-gray-200' : 'text-gray-700'
+              }`}>
                 <Gift className="w-4 h-4" /> Gift Tertinggi
               </p>
               <p className="text-lg font-semibold text-red-400">
@@ -211,11 +231,17 @@ export default function MemberDetail() {
             </div>
 
             {/* Durasi Terlama */}
-            <div className="bg-gray-700 rounded-md p-3 text-center border border-gray-600">
-              <p className="text-gray-200 text-xs flex justify-center items-center gap-1">
+            <div className={`rounded-md p-3 text-center ${
+              isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
+            }`}>
+              <p className={`text-xs flex justify-center items-center gap-1 ${
+                isDark ? 'text-gray-200' : 'text-gray-700'
+              }`}>
                 <Clock className="w-4 h-4" /> Durasi Terlama
               </p>
-              <p className="text-gray-100 text-lg font-semibold">
+              <p className={`text-lg font-semibold ${
+                isDark ? 'text-gray-100' : 'text-gray-900'
+              }`}>
                 {durationHours > 0
                   ? `${durationHours} Jam ${durationMin % 60} Menit`
                   : `${durationMin} Menit`}
@@ -223,17 +249,25 @@ export default function MemberDetail() {
             </div>
 
             {/* Terakhir Live */}
-            <div className="bg-gray-700 rounded-md p-3 text-center sm:col-span-2 lg:col-span-3 border border-gray-600">
-              <p className="text-gray-200 text-xs flex justify-center items-center gap-1">
+            <div className={`rounded-md p-3 text-center sm:col-span-2 lg:col-span-3 ${
+              isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
+            }`}>
+              <p className={`text-xs flex justify-center items-center gap-1 ${
+                isDark ? 'text-gray-200' : 'text-gray-700'
+              }`}>
                 <Calendar className="w-4 h-4" /> Terakhir Live
               </p>
-              <p className="text-gray-100 text-lg font-semibold">{lastLiveDate}</p>
+              <p className={`text-lg font-semibold ${
+                isDark ? 'text-gray-100' : 'text-gray-900'
+              }`}>{lastLiveDate}</p>
             </div>
           </div>
         </div>
 
         {/* Sosial Media */}
-        <div className="mt-6 bg-gray-800 p-4 rounded-md border border-gray-700">
+        <div className={`mt-6 p-4 rounded-md ${
+          isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
+        }`}>
           <h3 className="font-semibold text-lg text-red-400 mb-3 flex items-center gap-2">
             🌐 Media Sosial
           </h3>

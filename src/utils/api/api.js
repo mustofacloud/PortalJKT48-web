@@ -34,8 +34,8 @@ export async function fetchRecent(search = "", filter = "active", type = "all", 
   return res.data;
 }
 
-export async function fetchNews(page = 1, perpage = 3) {
-  const res = await axios.get(BASE.news, { params: { page, perpage } });
+export async function fetchNews(page = 1, perpage = 10, search = "") {
+  const res = await axios.get(BASE.news, { params: { page, perpage, search } });
   return res.data;
 }
 

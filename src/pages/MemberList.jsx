@@ -1,9 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 import MemberCard from "../components/MemberCard";
 import memberData from "../data/MEMBER.json";
 import SkeletonLoader from "../utils/SkeletonLoader";
 
 export default function MemberList() {
+  const { isDark } = useTheme();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -39,10 +41,14 @@ export default function MemberList() {
   if (loading) return <SkeletonLoader type="member" />;
 
   return (
-    <div className="max-w-7xl mx-auto py-1 text-gray-800">
+    <div className={`max-w-7xl mx-auto py-1 ${
+      isDark ? 'text-gray-200' : 'text-gray-800'
+    }`}>
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl font-bold text-gray-100">
+        <h2 className={`text-2xl font-bold ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>
           👩‍🎤 Daftar Member JKT48
         </h2>
       </div>

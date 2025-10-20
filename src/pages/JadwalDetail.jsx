@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 import axios from "axios";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -9,6 +10,7 @@ import { fetchTheaterDetail } from "../utils/api/api"
 dayjs.locale("id");
 
 export default function JadwalDetail() {
+  const { isDark } = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const [showData, setShowData] = useState(null);
@@ -92,9 +94,13 @@ export default function JadwalDetail() {
         </div>
 
         <div className="md:col-span-2 space-y-3">
-          <p className="text-white text-sm">{setlist?.description}</p>
+          <p className={`text-sm ${
+            isDark ? 'text-gray-200' : 'text-gray-800'
+          }`}>{setlist?.description}</p>
 
-          <div className="text-sm mt-3 text-gray-300 space-y-1">
+          <div className={`text-sm mt-3 space-y-1 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             <p>
               📅 <b>{formattedDate}</b>
             </p>
@@ -159,7 +165,9 @@ export default function JadwalDetail() {
       </section>
 
       <section>
-        <h3 className="text-xl text-white font-semibold mb-4">👩‍🎤 Member Performing</h3>
+        <h3 className={`text-xl font-semibold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>👩‍🎤 Member Performing</h3>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {members && members.length > 0 ? (
             members.map((m) => <MemberSmallCard key={m.id} data={m} />)

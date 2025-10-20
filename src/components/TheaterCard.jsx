@@ -1,16 +1,24 @@
 import dayjs from "dayjs";
 import "dayjs/locale/id";
+import { useTheme } from "../contexts/ThemeContext";
+
 dayjs.locale("id");
 
 export default function TheaterCard({ data, type }) {
+  const { isDark } = useTheme();
+
   if (!data) return null;
 
   const { title, poster, member_count, date, seitansai } = data;
   const formattedDate = dayjs(date).format("DD MMM YYYY, HH:mm");
 
   return (
-    <div className="bg-slate-900 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col h-full">
-      <div className="relative w-full aspect-[3/4] bg-gray-200 flex items-center justify-center overflow-hidden">
+    <div className={`border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col h-full ${
+      isDark ? 'bg-slate-900 border-gray-200' : 'bg-white border-gray-300'
+    }`}>
+      <div className={`relative w-full aspect-[3/4] flex items-center justify-center overflow-hidden ${
+        isDark ? 'bg-gray-700' : 'bg-gray-200'
+      }`}>
         <img
           src={poster}
           alt={title}
@@ -32,10 +40,14 @@ export default function TheaterCard({ data, type }) {
 
       <div className="flex flex-col flex-grow justify-between p-3">
         <div>
-          <h3 className="font-semibold text-white text-sm line-clamp-2 leading-tight min-h-[2.5rem]">
+          <h3 className={`font-semibold text-sm line-clamp-2 leading-tight min-h-[2.5rem] ${
+            isDark ? 'text-white' : 'text-gray-800'
+          }`}>
             {title}
           </h3>
-          <p className="text-xs text-white/70 mt-1">{formattedDate}</p>
+          <p className={`text-xs mt-1 ${
+            isDark ? 'text-white/70' : 'text-gray-600'
+          }`}>{formattedDate}</p>
         </div>
 
         {seitansai && seitansai.length > 0 && (
@@ -55,7 +67,9 @@ export default function TheaterCard({ data, type }) {
           </div>
         )}
 
-        <p className="text-xs text-gray-600 mt-2">
+        <p className={`text-xs mt-2 ${
+          isDark ? 'text-gray-600' : 'text-gray-500'
+        }`}>
           👤 {member_count || 0} member
         </p>
       </div>

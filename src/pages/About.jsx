@@ -1,8 +1,16 @@
 import saweriaIcon from "../assets/saweria.png";
+import { useTheme } from "../contexts/ThemeContext";
 
-const About = () => (
-  <section className="py-10 text-center max-w-4xl mx-auto place-content-center text-white">
-    <h2 className="text-3xl font-semibold mb-6">Tentang Website Ini</h2>
+const About = () => {
+  const { isDark } = useTheme();
+
+  return (
+    <section className={`py-10 text-center max-w-4xl mx-auto place-content-center ${
+      isDark ? 'text-white' : 'text-gray-800'
+    }`}>
+      <h2 className={`text-3xl font-semibold mb-6 ${
+        isDark ? 'text-red-400' : 'text-red-600'
+      }`}>Tentang Website Ini</h2>
     <p className="text-gray-300 mb-6 leading-relaxed">
       Website ini dibuat oleh fans JKT48. Tujuannya untuk membuat platform streaming berbasis web dengan desain minimalis dan modern, yang menyediakan jadwal event, berita terkini, daftar member, histori live, dan berbagai fitur lainnya untuk mendukung kegiatan JKT48.
     </p>
@@ -30,11 +38,12 @@ const About = () => (
       </a>
     </div>
 
-    <div className="text-gray-400">
-      <p className="mb-2">Terima kasih kepada:</p>
-      <p className="font-semibold text-lg">JKT48 & IDN Live</p>
-    </div>
-  </section>
-);
+      <div className="text-gray-400">
+        <p className="mb-2">Terima kasih kepada:</p>
+        <p className="font-semibold text-lg">JKT48 & IDN Live</p>
+      </div>
+    </section>
+  );
+};
 
 export default About;

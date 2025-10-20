@@ -6,8 +6,10 @@ import CommentIDN from "../components/CommentIDN";
 import CommentShowroom from "../components/CommentShowroom";
 import LiveCard from "../components/LiveCard";
 import { API_URLS, fetchIdnOnlives, fetchShowroomGifts, fetchIdnTopGifters } from "../utils/api/api.js";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function WatchLivePage() {
+  const { isDark } = useTheme();
   const { roomId } = useParams();
   const navigate = useNavigate();
   const videoRef = useRef(null);
@@ -368,7 +370,9 @@ export default function WatchLivePage() {
   };
 
   return (
-    <div className="w-full min-h-screen text-white overflow-hidden">
+    <div className={`w-full min-h-screen overflow-hidden ${
+      isDark ? 'text-white' : 'text-gray-900'
+    }`}>
       <div className="grid md:grid-cols-5 md:grid-rows-6 md:gap-4 h-screen p-1">
         <div className="md:col-span-3 md:row-span-4 bg-black rounded-xl overflow-hidden relative flex items-center justify-center group"
              onMouseEnter={handleMouseEnter}
@@ -482,17 +486,25 @@ export default function WatchLivePage() {
           </div>
         </div>
 
-        <div className="md:col-span-3 md:row-start-5 bg-[#111] rounded-xl border border-gray-800 flex items-center justify-between px-4 py-2">
+        <div className={`md:col-span-3 md:row-start-5 rounded-xl border flex items-center justify-between px-4 py-2 ${
+          isDark
+            ? 'bg-[#111] border-gray-800'
+            : 'bg-gray-100 border-gray-300'
+        }`}>
           <div className="flex items-center gap-3">
             {imgAlt && (
               <img
                 src={imgAlt}
                 alt={username}
-                className="w-10 h-10 rounded-md object-cover border border-gray-700"
+                className={`w-10 h-10 rounded-md object-cover border ${
+                  isDark ? 'border-gray-700' : 'border-gray-400'
+                }`}
               />
             )}
             <div>
-              <p className="font-semibold text-lg">{username}</p>
+              <p className={`font-semibold text-lg ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>{username}</p>
               <p className="text-sm text-red-400">
                 {type === "idn" ? "IDN Live" : "Showroom Live"}
               </p>
@@ -514,13 +526,19 @@ export default function WatchLivePage() {
           )}
         </div>
 
-        <div className="md:col-span-2 md:row-span-6 md:col-start-4 bg-[#111] rounded-xl flex flex-col overflow-hidden h-[40vh] md:h-auto">
+        <div className={`md:col-span-2 md:row-span-6 md:col-start-4 rounded-xl flex flex-col overflow-hidden h-[40vh] md:h-auto ${
+          isDark
+            ? 'bg-[#111] border border-gray-800'
+            : 'bg-gray-100 border border-gray-300'
+        }`}>
           <div className="flex">
             <button
               className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
                 activeTab === 'chat'
                   ? "bg-red-600 text-white"
-                  : "bg-transparent text-gray-400 hover:text-white"
+                  : isDark
+                    ? "bg-transparent text-gray-400 hover:text-white"
+                    : "bg-transparent text-gray-600 hover:text-gray-900"
               }`}
               onClick={() => setActiveTab('chat')}
             >
@@ -531,7 +549,9 @@ export default function WatchLivePage() {
                 className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
                   activeTab === 'gifts'
                     ? "bg-red-600 text-white"
-                    : "bg-transparent text-gray-400 hover:text-white"
+                    : isDark
+                      ? "bg-transparent text-gray-400 hover:text-white"
+                      : "bg-transparent text-gray-600 hover:text-gray-900"
                 }`}
                 onClick={() => setActiveTab('gifts')}
               >
@@ -542,7 +562,9 @@ export default function WatchLivePage() {
               className={`flex-1 py-2 text-sm font-semibold transition cursor-pointer ${
                 activeTab === 'other'
                   ? "bg-red-600 text-white"
-                  : "bg-transparent text-gray-400 hover:text-white"
+                  : isDark
+                    ? "bg-transparent text-gray-400 hover:text-white"
+                    : "bg-transparent text-gray-600 hover:text-gray-900"
               }`}
               onClick={() => setActiveTab('other')}
             >
@@ -570,7 +592,9 @@ export default function WatchLivePage() {
                     onNewMessage={handleNewMessage}
                   />
                 ) : (
-                  <div className="text-gray-500 text-center mt-5">
+                  <div className={`text-center mt-5 ${
+                    isDark ? 'text-gray-500' : 'text-gray-600'
+                  }`}>
                     Chat tidak tersedia
                   </div>
                 )}
@@ -580,7 +604,9 @@ export default function WatchLivePage() {
                 recentGifts.length > 0 ? (
                   <div className="space-y-2">
                     {recentGifts.slice(0, 8).map((gift, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm bg-gray-800 p-2 rounded">
+                      <div key={index} className={`flex items-center gap-2 text-sm p-2 rounded ${
+                        isDark ? 'bg-gray-800' : 'bg-white'
+                      }`}>
                         <img src={gift.image} alt="gift" className="w-10 h-10" />
                         <span className="font-semibold text-red-400">{gift.name}</span>
                         <span className="text-yellow-400">x{gift.num}</span>
@@ -588,7 +614,9 @@ export default function WatchLivePage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-400 text-center mt-5">
+                  <div className={`text-center mt-5 ${
+                    isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
                     🎁 Tidak ada gift terbaru
                   </div>
                 )
@@ -596,7 +624,9 @@ export default function WatchLivePage() {
                 topGifters.length > 0 ? (
                   <div className="space-y-2">
                     {topGifters.map((gifter, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm bg-gray-800 p-2 rounded">
+                      <div key={index} className={`flex items-center gap-2 text-sm p-2 rounded ${
+                        isDark ? 'bg-gray-800' : 'bg-white'
+                      }`}>
                         <img src={gifter.image_url} alt="avatar" className="w-10 h-10 rounded-full" />
                         <span className="font-semibold text-red-400">{gifter.name}</span>
                         <span className="text-yellow-400">{gifter.total_gold} Gold</span>
@@ -604,7 +634,9 @@ export default function WatchLivePage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-400 text-center mt-5">
+                  <div className={`text-center mt-5 ${
+                    isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
                     🏆 Tidak ada top gifter
                   </div>
                 )
@@ -618,7 +650,9 @@ export default function WatchLivePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-gray-400 text-center mt-5">
+              <div className={`text-center mt-5 ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
+              }`}>
                 🔴 Tidak ada live lainnya
               </div>
             )}
@@ -627,12 +661,22 @@ export default function WatchLivePage() {
       </div>
 
       {liveEnded && (
-        <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="slate-900 border border-gray-700 rounded-xl p-6 text-center w-80 animate-fadeIn">
-            <h3 className="text-lg font-semibold mb-2">
+        <div className={`absolute inset-0 flex items-center justify-center z-50 ${
+          isDark ? 'bg-black/70' : 'bg-gray-900/70'
+        }`}>
+          <div className={`rounded-xl p-6 text-center w-80 animate-fadeIn ${
+            isDark
+              ? 'bg-slate-900 border border-gray-700'
+              : 'bg-white border border-gray-300'
+          }`}>
+            <h3 className={`text-lg font-semibold mb-2 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
               ⚠️ Live Telah Berakhir
             </h3>
-            <p className="text-sm text-gray-300 mb-4">
+            <p className={`text-sm mb-4 ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Live yang kamu tonton sudah selesai.
             </p>
             <button

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 import SkeletonLoader from "../utils/SkeletonLoader"
 import { HiSignalSlash } from "react-icons/hi2";
 import { fetchLive, fetchNews, fetchBirthday } from "../utils/api/api";
@@ -12,6 +13,7 @@ import memberData from "../data/MEMBER.json";
 import errorImg from "../assets/error.png";
 
 export default function Home() {
+  const { isDark } = useTheme();
   const [live, setLive] = useState([]);
   const [news, setNews] = useState([]);
   const [birthday, setBirthday] = useState([]);
@@ -51,7 +53,9 @@ export default function Home() {
   return (
     <div className="max-w-7xl mx-auto py-1 space-y-10 text-white">
       <section>
-        <h2 className="flex items-center justify-between text-2xl font-bold mb-4 text-white">
+        <h2 className={`flex items-center justify-between text-2xl font-bold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>
           <span>🎥 Member Live</span>
           {live.length > 0 ? (
             <div className="relative">
@@ -82,7 +86,9 @@ export default function Home() {
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-white">🎂 Ulang Tahun Terdekat</h2>
+          <h2 className={`text-2xl font-bold mb-4 ${
+            isDark ? 'text-red-400' : 'text-red-600'
+          }`}>🎂 Ulang Tahun Terdekat</h2>
           {!error && birthday.length > 0 ? (
             <div className="space-y-3">
               {birthday.slice(0, 3).map((b, idx) => (
@@ -104,7 +110,9 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-white">📰 Berita Terbaru</h2>
+          <h2 className={`text-2xl font-bold mb-4 ${
+            isDark ? 'text-red-400' : 'text-red-600'
+          }`}>📰 Berita Terbaru</h2>
 
           {!error && news.length > 0 ? (
             <div className="space-y-3">
@@ -113,7 +121,11 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8 bg-slate-900 border border-slate-700 rounded-xl">
+            <div className={`flex flex-col items-center text-center py-8 border rounded-xl ${
+              isDark
+                ? 'bg-slate-900 border-slate-700'
+                : 'bg-white border-gray-300'
+            }`}>
               <span>
                 <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
@@ -128,7 +140,9 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-white">👩‍🎤 Member List</h2>
+        <h2 className={`text-2xl font-bold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>👩‍🎤 Member List</h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-3">
           {memberData.slice(0, 6).map((m, idx) => (
             <MemberCard key={idx} data={m} />
