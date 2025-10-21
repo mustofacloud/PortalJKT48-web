@@ -10,7 +10,7 @@ import {
   BarChart2,
   User,
   Activity,
-} from "lucide-react"; // icon lucide-react
+} from "lucide-react";
 
 export default function MemberDetail() {
   const { isDark } = useTheme();
@@ -79,7 +79,6 @@ export default function MemberDetail() {
       </div>
     );
 
-  // ====== Ekstrak data ======
   const {
     name,
     nickname,
@@ -101,7 +100,6 @@ export default function MemberDetail() {
     day: "numeric",
   });
 
-  // Statistik
   const totalShowroom = stats?.total_live?.showroom || 0;
   const totalIDN = stats?.total_live?.idn || 0;
   const mostGift = stats?.most_gift?.gift || 0;
@@ -120,9 +118,7 @@ export default function MemberDetail() {
     <div className={`rounded-xl overflow-hidden shadow-lg max-w-7xl mx-auto my-1 ${
       isDark ? 'text-gray-200' : 'text-gray-900'
     }`}>
-      {/* Header: Avatar & Jikosokai */}
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between px-6 gap-6 md:gap-10">
-        {/* Avatar & Info */}
         <div className="flex items-center gap-4">
           <img
             src={img_alt || img}
@@ -145,7 +141,6 @@ export default function MemberDetail() {
           </div>
         </div>
 
-        {/* Jikosokai */}
         {jikosokai && (
           <div className={`p-4 rounded-md md:w-1/2 text-center md:text-left ${
             isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
@@ -155,9 +150,7 @@ export default function MemberDetail() {
         )}
       </div>
 
-      {/* Konten utama */}
       <div className="pt-3 px-6 pb-8">
-        {/* Informasi pribadi & deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={`p-4 rounded-md space-y-1 ${
             isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
@@ -191,7 +184,6 @@ export default function MemberDetail() {
           </div>
         </div>
 
-        {/* Statistik */}
         <div className={`mt-3 p-4 rounded-md ${
           isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
         }`}>
@@ -199,7 +191,6 @@ export default function MemberDetail() {
             <BarChart2 className="w-5 h-5 text-red-400" /> Statistik Live
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* ✅ Total Live (Showroom & IDN dalam 1 box) */}
             <div className={`rounded-md p-3 text-center ${
               isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
             }`}>
@@ -216,7 +207,6 @@ export default function MemberDetail() {
               </div>
             </div>
 
-            {/* Gift Tertinggi */}
             <div className={`rounded-md p-3 text-center ${
               isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
             }`}>
@@ -230,7 +220,6 @@ export default function MemberDetail() {
               </p>
             </div>
 
-            {/* Durasi Terlama */}
             <div className={`rounded-md p-3 text-center ${
               isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
             }`}>
@@ -248,7 +237,6 @@ export default function MemberDetail() {
               </p>
             </div>
 
-            {/* Terakhir Live */}
             <div className={`rounded-md p-3 text-center sm:col-span-2 lg:col-span-3 ${
               isDark ? 'bg-gray-700 border border-gray-600' : 'bg-gray-200 border border-gray-400'
             }`}>
@@ -264,7 +252,6 @@ export default function MemberDetail() {
           </div>
         </div>
 
-        {/* Sosial Media */}
         <div className={`mt-6 p-4 rounded-md ${
           isDark ? 'bg-gray-800 border border-gray-700' : 'bg-gray-100 border border-gray-300'
         }`}>

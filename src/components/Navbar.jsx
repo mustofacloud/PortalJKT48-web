@@ -31,7 +31,6 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-20 top-0 left-0 rounded-b-3xl transition-colors duration-300 ${isDark ? 'bg-slate-900' : 'bg-white shadow-md'}`}>
       <div className="container mx-auto flex justify-between items-center p-3">
-        {/* 🔻 Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img
             src={logoHeader}
@@ -40,7 +39,6 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* 🔻 Menu navigasi dan tombol toggle */}
         <div className="flex items-center gap-2">
           <ul
             className={`
@@ -76,7 +74,6 @@ const Navbar = () => {
                   <span>{item.label}</span>
                 </NavLink>
 
-                {/* 🔻 Underline animasi */}
                 <span
                   className={`
                     absolute bottom-0 left-0 w-0 h-[2px] bg-red-400 rounded-full

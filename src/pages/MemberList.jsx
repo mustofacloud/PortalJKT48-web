@@ -10,15 +10,13 @@ export default function MemberList() {
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
 
-  // ✅ Simulasikan loading data dari file JSON
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 800); // delay 0.8 detik untuk efek skeleton
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
-  // 🔍 Filter + Pencarian + Urutkan A–Z
   const filteredMembers = useMemo(() => {
     const filtered = memberData.filter((m) => {
       const matchesSearch =
@@ -37,14 +35,12 @@ export default function MemberList() {
     );
   }, [search, filter]);
 
-  // ⏳ Saat loading, tampilkan skeleton loader
   if (loading) return <SkeletonLoader type="member" />;
 
   return (
     <div className={`max-w-7xl mx-auto py-1 ${
       isDark ? 'text-gray-200' : 'text-gray-800'
     }`}>
-      {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className={`text-2xl font-bold ${
           isDark ? 'text-red-400' : 'text-red-600'
@@ -53,7 +49,6 @@ export default function MemberList() {
         </h2>
       </div>
 
-      {/* FILTER KATEGORI */}
       <div className="flex flex-wrap gap-3 mb-6">
         {["all", "anggota", "trainee"].map((f) => (
           <button
@@ -71,7 +66,6 @@ export default function MemberList() {
           </button>
         ))}
 
-        {/* SEARCH BAR */}
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center w-full sm:w-auto">
           <input
             type="text"
@@ -83,7 +77,6 @@ export default function MemberList() {
         </div>
       </div>
 
-      {/* GRID MEMBER */}
       {filteredMembers.length > 0 ? (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4">
           {filteredMembers.map((member, i) => (

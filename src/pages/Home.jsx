@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import SkeletonLoader from "../utils/SkeletonLoader"
 import { HiSignalSlash } from "react-icons/hi2";
-import { fetchLive, fetchNews, fetchBirthday } from "../utils/api/api";
+import { fetchLive, fetchNews, fetchBirthday, fetchYoutube } from "../utils/api/api";
 import LiveCard from "../components/LiveCard";
 import NewsCard from "../components/NewsCard";
 import MemberCard from "../components/MemberCard";
 import BirthdayCard from "../components/BirthdayCard";
+import YoutubeCard from "../components/YoutubeCard";
 import memberData from "../data/MEMBER.json";
 
 // 🖼️ gambar error
@@ -17,6 +18,7 @@ export default function Home() {
   const [live, setLive] = useState([]);
   const [news, setNews] = useState([]);
   const [birthday, setBirthday] = useState([]);
+  const [youtube, setYoutube] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -26,19 +28,23 @@ export default function Home() {
       setError(false);
 
       try {
-        const resLive = await fetchLive();
-        const resNews = await fetchNews();
-        const resBday = await fetchBirthday();
+        // Fetch all APIs independently to prevent one failure from affecting others
+        const promises = [
+          fetchLive().catch(err => { console.error("❌ Live API error:", err); return []; }),
+          fetchNews().catch(err => { console.error("❌ News API error:", err); return { news: [] }; }),
+          fetchBirthday().catch(err => { console.error("❌ Birthday API error:", err); return []; }),
+          fetchYoutube().catch(err => { console.error("❌ YouTube API error:", err); return []; })
+        ];
 
-        if (!Array.isArray(resLive) || !Array.isArray(resNews.news) || !Array.isArray(resBday)) {
-          throw new Error("Invalid API structure");
-        }
+        const [resLive, resNews, resBday, resYoutube] = await Promise.all(promises);
 
-        setLive(resLive);
-        setNews(resNews.news);
-        setBirthday(resBday);
+        // Validate and set data
+        setLive(Array.isArray(resLive) ? resLive : []);
+        setNews(Array.isArray(resNews.news) ? resNews.news : []);
+        setBirthday(Array.isArray(resBday) ? resBday : []);
+        setYoutube(Array.isArray(resYoutube) ? resYoutube : []);
       } catch (err) {
-        console.error("❌ Gagal fetch API:", err);
+        console.error("❌ General fetch error:", err);
         setError(true);
       } finally {
         setLoading(false);
@@ -67,17 +73,15 @@ export default function Home() {
           )}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-3">
-          {!error && live.length > 0 ? (
+          {live.length > 0 ? (
             live.map((item, idx) => <LiveCard key={idx} live={item} />)
           ) : (
-            <div className="col-span-full flex flex-col items-center text-center py-8 bg-slate-800 rounded-xl border border-slate-700">
+            <div className="col-span-full flex flex-col items-center text-center py-8 bg-gray-300/50 rounded-xl ">
               <span>
                 <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
               <p className="text-red-400 font-semibold">
-                {error
-                  ? "Gagal memuat data Live ⚠️"
-                  : "Tidak ada member yang sedang live."}
+                Tidak ada member yang sedang live.
               </p>
             </div>
           )}
@@ -89,21 +93,19 @@ export default function Home() {
           <h2 className={`text-2xl font-bold mb-4 ${
             isDark ? 'text-red-400' : 'text-red-600'
           }`}>🎂 Ulang Tahun Terdekat</h2>
-          {!error && birthday.length > 0 ? (
+          {birthday.length > 0 ? (
             <div className="space-y-3">
-              {birthday.slice(0, 3).map((b, idx) => (
+              {birthday.map((b, idx) => (
                 <BirthdayCard key={idx} data={b} />
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center py-8 bg-slate-800 rounded-xl border border-slate-700">
+            <div className="flex flex-col items-center text-center py-8 bg-gray-300/50 rounded-xl">
               <span>
-                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
+                <HiSignalSlash className="w-20 h-20 mb-3 text-gray-800" />
               </span>
               <p className="text-red-400 font-semibold">
-                {error
-                  ? "Gagal memuat data ulang tahun ⚠️"
-                  : "Tidak ada ulang tahun dalam waktu dekat."}
+                Tidak ada ulang tahun dalam waktu dekat.
               </p>
             </div>
           )}
@@ -114,25 +116,23 @@ export default function Home() {
             isDark ? 'text-red-400' : 'text-red-600'
           }`}>📰 Berita Terbaru</h2>
 
-          {!error && news.length > 0 ? (
+          {news.length > 0 ? (
             <div className="space-y-3">
-              {news.slice(0, 3).map((n, idx) => (
+              {news.slice(0, 4).map((n, idx) => (
                 <NewsCard key={idx} data={n} />
               ))}
             </div>
           ) : (
             <div className={`flex flex-col items-center text-center py-8 border rounded-xl ${
               isDark
-                ? 'bg-slate-900 border-slate-700'
-                : 'bg-white border-gray-300'
+                ? 'bg-gray-300/50'
+                : 'bg-gray-300/50'
             }`}>
               <span>
                 <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
               </span>
               <p className="text-red-400 font-semibold">
-                {error
-                  ? "Gagal memuat berita terbaru ⚠️"
-                  : "Belum ada berita terbaru."}
+                Belum ada berita terbaru.
               </p>
             </div>
           )}
@@ -147,6 +147,28 @@ export default function Home() {
           {memberData.slice(0, 6).map((m, idx) => (
             <MemberCard key={idx} data={m} />
           ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className={`text-2xl font-bold mb-4 ${
+          isDark ? 'text-red-400' : 'text-red-600'
+        }`}>📺 YouTube</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {youtube.length > 0 ? (
+            youtube.slice(0, 6).map((item, idx) => (
+              <YoutubeCard key={idx} data={item} />
+            ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center text-center py-8 bg-gray-300/50 rounded-xl">
+              <span>
+                <HiSignalSlash className="w-20 h-20 mb-3 opacity-80 text-gray-500" />
+              </span>
+              <p className="text-red-400 font-semibold">
+                Tidak ada video YouTube terbaru.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </div>

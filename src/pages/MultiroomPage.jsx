@@ -2,10 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
 import { IoMdClose, IoMdAdd, IoMdAlert } from "react-icons/io";
 import { useTheme } from "../contexts/ThemeContext";
-
-const LIVE_URL =
-  "https://api.crstlnz.my.id/api/now_live?group=jkt48&debug=false";
-const IDN_PROXY = "https://jkt48showroom-api.my.id/proxy?url=";
+import { API_URLS, fetchLive } from "../utils/api/api";
 
 function LivePlayer({ live, onRemove }) {
   const videoRef = useRef(null);
@@ -66,7 +63,7 @@ function LivePlayer({ live, onRemove }) {
     >
       <video
         ref={videoRef}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain"
         controls
         autoPlay
         muted
@@ -91,12 +88,10 @@ export default function MultiroomPage() {
   const [selected, setSelected] = useState([]);
   const [showListMobile, setShowListMobile] = useState(false);
 
-  // Alert modal
   const [showAlert, setShowAlert] = useState(false);
   const [closingAlert, setClosingAlert] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
 
-  // Grid setting
   const [cols, setCols] = useState(3);
   const [rows, setRows] = useState(2);
 
@@ -106,8 +101,7 @@ export default function MultiroomPage() {
   useEffect(() => {
     const getLives = async () => {
       try {
-        const res = await fetch(LIVE_URL);
-        const data = await res.json();
+        const data = await fetchLive();
         const arr = Array.isArray(data) ? data : data.data || [];
         setLives(arr);
       } catch (err) {
@@ -151,7 +145,7 @@ export default function MultiroomPage() {
 
     const url =
       item.type === "idn"
-        ? `${IDN_PROXY}${encodeURIComponent(stream)}`
+        ? `${API_URLS.IDN_PROXY}${encodeURIComponent(stream)}`
         : stream;
 
     setSelected((prev) => [...prev, { ...item, url }]);
@@ -167,12 +161,10 @@ export default function MultiroomPage() {
       isDark ? 'text-white' : 'text-gray-900'
     }`}>
       <div className="flex flex-col md:flex-row gap-4 p-2">
-        {/* Grid multiroom */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-bold animate-fadeIn">Multiroom Live</h1>
 
-            {/* Setting rows/cols */}
             <div className="flex gap-2 items-center text-sm">
               <label>
                 Cols:{" "}
@@ -213,7 +205,6 @@ export default function MultiroomPage() {
             </div>
           </div>
 
-          {/* grid live */}
           <div
             className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-4 place-items-stretch"
             style={{
@@ -239,7 +230,6 @@ export default function MultiroomPage() {
           </div>
         </div>
 
-        {/* List member (desktop) */}
         <div className={`hidden md:block md:w-64 rounded-lg p-3 overflow-y-auto h-[80vh] ${
           isDark
             ? 'bg-[#111] border border-gray-600'
@@ -286,7 +276,6 @@ export default function MultiroomPage() {
           </div>
         </div>
 
-        {/* Floating button (mobile) */}
         <button
           onClick={() => setShowListMobile(true)}
           className="md:hidden fixed bottom-6 right-6 bg-red-600 hover:bg-red-700 text-white p-4 rounded-full shadow-lg animate-bounce"
@@ -294,7 +283,6 @@ export default function MultiroomPage() {
           <IoMdAdd size={24} />
         </button>
 
-        {/* Modal list (mobile) */}
         {showListMobile && (
           <div className={`fixed inset-0 flex items-end z-50 ${
             isDark ? 'bg-black/70' : 'bg-gray-900/70'
@@ -353,7 +341,6 @@ export default function MultiroomPage() {
           </div>
         )}
 
-        {/* Modal Alert */}
         {showAlert && (
           <div
             className={`fixed inset-0 flex items-center justify-center z-50 ${

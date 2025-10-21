@@ -38,10 +38,6 @@ export default function News() {
     window.scrollTo(0, 0);
   }, [page, search]);
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-    setPage(1); // Reset to first page when searching
-  };
 
   if (loading) return <SkeletonLoader type="news" />;
 
@@ -60,20 +56,6 @@ export default function News() {
         }`}>
           📰 Berita Terbaru
         </h2>
-
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Cari berita..."
-            value={search}
-            onChange={handleSearchChange}
-            className={`w-full max-w-md px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 ${
-              isDark
-                ? 'bg-slate-800 border-slate-600 text-white placeholder-gray-400'
-                : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-            }`}
-          />
-        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3">
           {newsList.map((item) => {

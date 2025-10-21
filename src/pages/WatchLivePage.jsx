@@ -511,15 +511,14 @@ export default function WatchLivePage() {
             </div>
           </div>
 
-          {/* 🆕 Title hanya muncul untuk IDN Live */}
           {type === "idn" && slug && (
             <div className="text-right animate-slideIn">
               <p className="text-sm font-semibold text-red-600">
                 {
                   slug
-                    .replace(/-\d+$/, "") // hapus angka di akhir
-                    .replace(/-/g, " ") // ubah strip jadi spasi
-                    .replace(/\b\w/g, (c) => c.toUpperCase()) // kapital setiap kata
+                    .replace(/-\d+$/, "")
+                    .replace(/-/g, " ")
+                    .replace(/\b\w/g, (c) => c.toUpperCase())
                 }
               </p>
             </div>

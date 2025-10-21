@@ -1,25 +1,26 @@
 import axios from "axios";
 
 const BASE = {
-  jadwal: "https://api.crstlnz.my.id/api/event",
-  live: "https://api.crstlnz.my.id/api/now_live?group=jkt48&debug=false",
-  recent: "https://api.crstlnz.my.id/api/recent?sort=date&page=1&filter=active&order=-1&perpage=12&search=&room_id=&group=jkt48&type=all",
-  news: "https://api.crstlnz.my.id/api/news",
-  birthday: "https://api.crstlnz.my.id/api/next_birthday?group=jkt48",
+  jadwal: `${import.meta.env.VITE_API_BASE}/api/event`,
+  live: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48&debug=false`,
+  recent: `${import.meta.env.VITE_API_BASE}/api/recent?sort=date&page=1&filter=active&order=-1&perpage=12&search=&room_id=&group=jkt48&type=all`,
+  news: `${import.meta.env.VITE_API_BASE}/api/news`,
+  birthday: `${import.meta.env.VITE_API_BASE}/api/next_birthday?group=jkt48`,
+  youtube: import.meta.env.VITE_YOUTUBE_API,
 
-  recentDetail: (id) => `https://api.crstlnz.my.id/api/recent/${id}`,
-  theaterDetail: (id) => `https://api.crstlnz.my.id/api/theater/${id}`,
-  newsDetail: (id) => `https://api.crstlnz.my.id/api/news/${id}`,
-  memberDetail: (url) => `https://proxi-ten.vercel.app/api/member/${encodeURIComponent(url)}`,
+  recentDetail: (id) => `${import.meta.env.VITE_API_BASE}/api/recent/${id}`,
+  theaterDetail: (id) => `${import.meta.env.VITE_API_BASE}/api/theater/${id}`,
+  newsDetail: (id) => `${import.meta.env.VITE_API_BASE}/api/news/${id}`,
+  memberDetail: (url) => `${import.meta.env.VITE_PROXY_MEMBER}${encodeURIComponent(url)}`,
 };
 
 // Additional API URLs for WatchLivePage
 export const API_URLS = {
-  LIVE_URL: "https://api.crstlnz.my.id/api/now_live?group=jkt48&debug=false",
-  IDN_PROXY: "https://jkt48showroom-api.my.id/proxy?url=",
-  IDN_ONLIVES: "https://api-idn.vercel.app/api/onlives",
-  SHOWROOM_GIFTS: (roomIdShowroom) => `https://sorum-mobile.vercel.app/api/lives/gift/${roomIdShowroom}/gift`,
-  IDN_TOP_GIFTERS: (uuidStreamer) => `https://api.idn.app/api/v1/gift/livestream/top-gifter/daily?type=daily&uuid_streamer=${uuidStreamer}&n=1`,
+  LIVE_URL: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48&debug=false`,
+  IDN_PROXY: import.meta.env.VITE_IDN_PROXY,
+  IDN_ONLIVES: import.meta.env.VITE_IDN_ONLIVES,
+  SHOWROOM_GIFTS: (roomIdShowroom) => `${import.meta.env.VITE_SHOWROOM_GIFTS_BASE}${roomIdShowroom}/gift`,
+  IDN_TOP_GIFTERS: (uuidStreamer) => `${import.meta.env.VITE_IDN_TOP_GIFTERS_BASE}${uuidStreamer}&n=1`,
 };
 
 
@@ -29,7 +30,7 @@ export async function fetchLive() {
 }
 
 export async function fetchRecent(search = "", filter = "active", type = "all", page = 1, perpage = 12) {
-  const url = `https://api.crstlnz.my.id/api/recent?sort=date&page=${page}&filter=${filter}&order=-1&perpage=${perpage}&search=${encodeURIComponent(search)}&room_id=&group=jkt48&type=${type}`;
+  const url = `${import.meta.env.VITE_API_BASE}/api/recent?sort=date&page=${page}&filter=${filter}&order=-1&perpage=${perpage}&search=${encodeURIComponent(search)}&room_id=&group=jkt48&type=${type}`;
   const res = await axios.get(url);
   return res.data;
 }
@@ -46,6 +47,11 @@ export async function fetchJadwal() {
 
 export async function fetchBirthday() {
   const res = await axios.get(BASE.birthday);
+  return res.data;
+}
+
+export async function fetchYoutube() {
+  const res = await axios.get(BASE.youtube);
   return res.data;
 }
 

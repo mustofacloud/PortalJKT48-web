@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import Jadwal from "../pages/Jadwal";
 import News from "../pages/News";
