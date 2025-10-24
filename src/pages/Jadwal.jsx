@@ -32,7 +32,7 @@ export default function Jadwal() {
   if (loading) return <SkeletonLoader type="jadwal" />;
 
   return (
-    <div className={`max-w-7xl mx-auto px-2 py-1 space-y-10 ${
+    <div className={`max-w-7xl mx-auto px-3 md:p-0 space-y-10 ${
       isDark ? 'text-gray-200' : 'text-gray-800'
     }`}>
       <section>

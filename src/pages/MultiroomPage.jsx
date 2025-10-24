@@ -160,7 +160,7 @@ export default function MultiroomPage() {
     <div className={`w-full min-h-screen overflow-hidden ${
       isDark ? 'text-white' : 'text-gray-900'
     }`}>
-      <div className="flex flex-col md:flex-row gap-4 p-2">
+      <div className="flex flex-col md:flex-row gap-4 px-2 md:p-0">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-bold animate-fadeIn">Multiroom Live</h1>

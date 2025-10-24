@@ -57,7 +57,7 @@ export default function Home() {
   if (loading) return <SkeletonLoader type="home" />;
 
   return (
-    <div className="max-w-7xl mx-auto py-1 space-y-10 text-white">
+    <div className="max-w-7xl mx-auto px-2 md:p-0 md:pb-3 space-y-10 text-white">
       <section>
         <h2 className={`flex items-center justify-between text-2xl font-bold mb-4 ${
           isDark ? 'text-red-400' : 'text-red-600'
@@ -140,11 +140,23 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className={`text-2xl font-bold mb-4 ${
-          isDark ? 'text-red-400' : 'text-red-600'
-        }`}>👩‍🎤 Member List</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className={`text-2xl font-bold ${
+            isDark ? 'text-red-400' : 'text-red-600'
+          }`}>👩‍🎤 Member List</h2>
+          <a
+            href="/member"
+            className={`text-sm font-medium px-3 py-1 rounded-lg transition-colors ${
+              isDark
+                ? 'text-gray-300 hover:text-red-400 hover:bg-gray-700'
+                : 'text-gray-700 hover:text-red-600 hover:bg-gray-100'
+            }`}
+          >
+            Lihat lainnya →
+          </a>
+        </div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-3">
-          {memberData.slice(0, 6).map((m, idx) => (
+          {memberData.slice(0, 12).map((m, idx) => (
             <MemberCard key={idx} data={m} />
           ))}
         </div>

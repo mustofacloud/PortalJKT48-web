@@ -49,7 +49,7 @@ export default function News() {
     );
 
   return (
-    <div className="w-full text-gray-800 min-h-screen py-1">
+    <div className="w-full text-gray-800 min-h-screen px-2 md:p-0">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-8">
         <h2 className={`text-2xl font-bold mb-6 ${
           isDark ? 'text-red-400' : 'text-red-600'

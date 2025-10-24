@@ -15,19 +15,25 @@ const Layout = () => {
 
   return (
     <div className={`flex flex-col min-h-dvh transition-colors duration-500 ${isDark ? 'dark' : ''}`}>
-      <Navbar />
-      <AnimatePresence mode="wait">
-        <motion.main
-          key={location.pathname}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="flex-grow pt-20 container mx-auto px-4"
-        >
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
+      <div className="md:flex">
+        <div className="md:w-16 xl:w-64 md:flex-shrink-0 transition-all duration-300 ease-in-out">
+          <Navbar />
+        </div>
+        <div className="md:flex-1 md:px-4 md:mt-3 transition-all duration-300 ease-in-out">
+          <AnimatePresence mode="wait">
+            <motion.main
+              key={location.pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="flex-grow pt-20 md:pt-8 container mx-auto"
+            >
+              <Outlet />
+            </motion.main>
+          </AnimatePresence>
+        </div>
+      </div>
       <Footer />
     </div>
   );

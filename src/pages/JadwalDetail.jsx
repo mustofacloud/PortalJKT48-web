@@ -67,7 +67,7 @@ export default function JadwalDetail() {
   const formattedDate = dayjs(date).format("dddd, DD MMMM YYYY HH:mm");
 
   return (
-    <div className="max-w-6xl mx-auto py-1 space-y-10">
+    <div className="max-w-6xl mx-auto px-2 md:p-0 md:pb-3 space-y-10">
       {setlist?.banner && (
         <div className="relative w-full h-52 sm:h-64 md:h-80 rounded-xl overflow-hidden shadow">
           <img

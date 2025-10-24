@@ -38,7 +38,7 @@ export default function MemberList() {
   if (loading) return <SkeletonLoader type="member" />;
 
   return (
-    <div className={`max-w-7xl mx-auto py-1 ${
+    <div className={`max-w-7xl mx-auto px-2 md:p-0 md:pb-3 ${
       isDark ? 'text-gray-200' : 'text-gray-800'
     }`}>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
