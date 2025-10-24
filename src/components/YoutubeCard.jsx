@@ -29,7 +29,7 @@ export default function YoutubeCard({ data }) {
     >
       <div className="relative">
         <img
-          src={data.thumbnails.medium.url}
+          src={data.thumbnails.high.url}
           alt="thumbnail"
           className="w-full aspect-video object-cover rounded-lg"
         />
@@ -40,7 +40,7 @@ export default function YoutubeCard({ data }) {
       <div className="p-3">
         <div className="flex gap-3">
           <img
-            src={data.profilePict.medium.url}
+            src={data.profilePict.high.url}
             alt={data.channelTitle}
             className="w-9 h-9 rounded-full flex-shrink-0"
           />
