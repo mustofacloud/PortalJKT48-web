@@ -12,6 +12,7 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
+import logoHeader from "../assets/logo_header.png";
 
 
 const Navbar = () => {
