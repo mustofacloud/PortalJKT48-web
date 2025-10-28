@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center p-3">
           <Link to="/" className="flex items-center gap-2">
             <img
-              src="assets/logo_header.png"
+              src="../assets/logo_header.png"
               alt="PortalJKT48"
               className="h-6 sm:h-8 w-auto object-contain"
             />
