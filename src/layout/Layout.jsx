@@ -19,7 +19,7 @@ const Layout = () => {
         <div className="md:w-16 xl:w-64 md:flex-shrink-0 transition-all duration-300 ease-in-out">
           <Navbar />
         </div>
-        <div className="md:flex-1 md:px-4 md:mt-3 transition-all duration-300 ease-in-out">
+        <div className="md:flex-1 md:px-4 md:mt-1 pb-1 transition-all duration-300 ease-in-out">
           <AnimatePresence mode="wait">
             <motion.main
               key={location.pathname}
@@ -27,7 +27,8 @@ const Layout = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="flex-grow pt-20 md:pt-8 container mx-auto"
+              // add bottom padding for mobile so content is not hidden behind bottom navbar
+              className="flex-grow pt-4 md:pt-8 md:pb-0 container mx-auto"
             >
               <Outlet />
             </motion.main>

@@ -278,7 +278,7 @@ export default function MultiroomPage() {
 
         <button
           onClick={() => setShowListMobile(true)}
-          className="md:hidden fixed bottom-6 right-6 bg-red-600 hover:bg-red-700 text-white p-4 rounded-full shadow-lg animate-bounce"
+          className="md:hidden fixed bottom-12 right-6 bg-red-600 hover:bg-red-700 text-white p-4 rounded-full shadow-lg animate-bounce"
         >
           <IoMdAdd size={24} />
         </button>
