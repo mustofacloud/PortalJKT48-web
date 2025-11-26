@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE = {
   jadwal: `${import.meta.env.VITE_API_BASE}/api/event`,
-  live: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48&debug=true`,
+  live: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48`,
   recent: `${import.meta.env.VITE_API_BASE}/api/recent?sort=date&page=1&filter=active&order=-1&perpage=12&search=&room_id=&group=jkt48&type=all`,
   news: `${import.meta.env.VITE_API_BASE}/api/news`,
   birthday: `${import.meta.env.VITE_API_BASE}/api/next_birthday?group=jkt48`,
@@ -16,7 +16,7 @@ const BASE = {
 
 // Additional API URLs for WatchLivePage
 export const API_URLS = {
-  LIVE_URL: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48&debug=true`,
+  LIVE_URL: `${import.meta.env.VITE_API_BASE}/api/now_live?group=jkt48`,
   IDN_PROXY: import.meta.env.VITE_IDN_PROXY,
   IDN_ONLIVES: import.meta.env.VITE_IDN_ONLIVES,
   SHOWROOM_GIFTS: (roomIdShowroom) => `${import.meta.env.VITE_SHOWROOM_GIFTS_BASE}${roomIdShowroom}/gift`,
