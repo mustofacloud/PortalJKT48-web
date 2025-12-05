@@ -23,7 +23,9 @@ function LivePlayer({ live, onRemove }) {
       hls.attachMedia(video);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        console.log(`✅ HLS manifest loaded for ${live.name}, starting playback...`);
+        console.log(
+          `✅ HLS manifest loaded for ${live.name}, starting playback...`
+        );
         video.play().catch((e) => console.warn("Autoplay blocked:", e));
       });
 
@@ -132,8 +134,8 @@ export default function MultiroomPage() {
     if (selected.find((s) => s.room_id === item.room_id)) return;
 
     const stream = item.streaming_url_list?.find((s) => {
-      if (item.type === "idn") return s.label === "original";
-      if (item.type === "showroom") return s.label === "original quality";
+      if (item.type === "idn") return s.label === "Original";
+      if (item.type === "showroom") return s.label === "Original quality";
       return false;
     })?.url;
 
@@ -157,13 +159,17 @@ export default function MultiroomPage() {
   };
 
   return (
-    <div className={`w-full min-h-screen overflow-hidden ${
-      isDark ? 'text-white' : 'text-gray-900'
-    }`}>
+    <div
+      className={`w-full min-h-screen overflow-hidden ${
+        isDark ? "text-white" : "text-gray-900"
+      }`}
+    >
       <div className="flex flex-col md:flex-row gap-4 px-2 md:p-0">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold animate-fadeIn">Multiroom Live</h1>
+            <h1 className="text-2xl font-bold animate-fadeIn">
+              Multiroom Live
+            </h1>
 
             <div className="flex gap-2 items-center text-sm">
               <label>
@@ -173,12 +179,16 @@ export default function MultiroomPage() {
                   onChange={(e) => setCols(Number(e.target.value))}
                   className={`rounded px-2 py-1 ${
                     isDark
-                      ? 'bg-[#111] border border-gray-600 text-white'
-                      : 'bg-gray-100 border border-gray-300 text-gray-900'
+                      ? "bg-[#111] border border-gray-600 text-white"
+                      : "bg-gray-100 border border-gray-300 text-gray-900"
                   }`}
                 >
                   {Array.from({ length: maxCols }, (_, i) => i + 1).map((c) => (
-                    <option key={c} value={c} className={isDark ? 'bg-[#111]' : 'bg-gray-100'}>
+                    <option
+                      key={c}
+                      value={c}
+                      className={isDark ? "bg-[#111]" : "bg-gray-100"}
+                    >
                       {c}
                     </option>
                   ))}
@@ -191,12 +201,16 @@ export default function MultiroomPage() {
                   onChange={(e) => setRows(Number(e.target.value))}
                   className={`rounded px-2 py-1 ${
                     isDark
-                      ? 'bg-[#111] border border-gray-600 text-white'
-                      : 'bg-gray-100 border border-gray-300 text-gray-900'
+                      ? "bg-[#111] border border-gray-600 text-white"
+                      : "bg-gray-100 border border-gray-300 text-gray-900"
                   }`}
                 >
                   {Array.from({ length: maxRows }, (_, i) => i + 1).map((r) => (
-                    <option key={r} value={r} className={isDark ? 'bg-[#111]' : 'bg-gray-100'}>
+                    <option
+                      key={r}
+                      value={r}
+                      className={isDark ? "bg-[#111]" : "bg-gray-100"}
+                    >
                       {r}
                     </option>
                   ))}
@@ -221,20 +235,24 @@ export default function MultiroomPage() {
                 />
               ))
             ) : (
-              <div className={`col-span-full text-center py-8 ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
+              <div
+                className={`col-span-full text-center py-8 ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
                 Pilih live untuk mulai menonton.
               </div>
             )}
           </div>
         </div>
 
-        <div className={`hidden md:block md:w-64 rounded-lg p-3 overflow-y-auto h-[80vh] ${
-          isDark
-            ? 'bg-[#111] border border-gray-600'
-            : 'bg-gray-100 border border-gray-300'
-        }`}>
+        <div
+          className={`hidden md:block md:w-64 rounded-lg p-3 overflow-y-auto h-[80vh] ${
+            isDark
+              ? "bg-[#111] border border-gray-600"
+              : "bg-gray-100 border border-gray-300"
+          }`}
+        >
           <h3 className="font-semibold mb-3">Member Live</h3>
           <div className="space-y-3">
             {lives.length ? (
@@ -242,7 +260,7 @@ export default function MultiroomPage() {
                 <div
                   key={live.room_id || live.videoId}
                   className={`p-2 rounded-lg flex items-center gap-2 ${
-                    isDark ? 'bg-[#1a1a1a]' : 'bg-white'
+                    isDark ? "bg-[#1a1a1a]" : "bg-white"
                   }`}
                 >
                   <img
@@ -251,14 +269,18 @@ export default function MultiroomPage() {
                     className="w-12 h-12 object-cover rounded-md"
                   />
                   <div className="flex-1">
-                    <div className={`text-sm font-semibold ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <div
+                      className={`text-sm font-semibold ${
+                        isDark ? "text-white" : "text-gray-900"
+                      }`}
+                    >
                       {live.name || live.title}
                     </div>
-                    <div className={`text-xs ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
+                    <div
+                      className={`text-xs ${
+                        isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {live.type?.toUpperCase()}
                     </div>
                   </div>
@@ -271,7 +293,9 @@ export default function MultiroomPage() {
                 </div>
               ))
             ) : (
-              <div className={isDark ? 'text-gray-400' : 'text-gray-600'}>Tidak ada yang live 😥</div>
+              <div className={isDark ? "text-gray-400" : "text-gray-600"}>
+                Tidak ada yang live 😥
+              </div>
             )}
           </div>
         </div>
@@ -284,17 +308,25 @@ export default function MultiroomPage() {
         </button>
 
         {showListMobile && (
-          <div className={`fixed inset-0 flex items-end z-50 ${
-            isDark ? 'bg-black/70' : 'bg-gray-900/70'
-          }`}>
-            <div className={`w-full max-h-[70vh] rounded-t-lg p-4 overflow-y-auto animate-fadeIn ${
-              isDark ? 'bg-[#111]' : 'bg-gray-100'
-            }`}>
+          <div
+            className={`fixed inset-0 flex items-end z-50 ${
+              isDark ? "bg-black/70" : "bg-gray-900/70"
+            }`}
+          >
+            <div
+              className={`w-full max-h-[70vh] rounded-t-lg p-4 overflow-y-auto animate-fadeIn ${
+                isDark ? "bg-[#111]" : "bg-gray-100"
+              }`}
+            >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-semibold text-lg">Pilih Member Live</h3>
                 <button
                   onClick={() => setShowListMobile(false)}
-                  className={isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}
+                  className={
+                    isDark
+                      ? "text-gray-400 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  }
                 >
                   <IoMdClose size={24} />
                 </button>
@@ -305,23 +337,29 @@ export default function MultiroomPage() {
                     <div
                       key={live.room_id || live.videoId}
                       className={`p-2 rounded-lg flex items-center gap-2 ${
-                        isDark ? 'bg-[#1a1a1a]' : 'bg-white'
+                        isDark ? "bg-[#1a1a1a]" : "bg-white"
                       }`}
                     >
                       <img
-                        src={live.img_alt || live.img || live.thumbnails?.high?.url}
+                        src={
+                          live.img_alt || live.img || live.thumbnails?.high?.url
+                        }
                         alt={live.name || live.title}
                         className="w-12 h-12 object-cover rounded-md"
                       />
                       <div className="flex-1">
-                        <div className={`text-sm font-semibold ${
-                          isDark ? 'text-white' : 'text-gray-900'
-                        }`}>
+                        <div
+                          className={`text-sm font-semibold ${
+                            isDark ? "text-white" : "text-gray-900"
+                          }`}
+                        >
                           {live.name || live.title}
                         </div>
-                        <div className={`text-xs ${
-                          isDark ? 'text-gray-400' : 'text-gray-600'
-                        }`}>
+                        <div
+                          className={`text-xs ${
+                            isDark ? "text-gray-400" : "text-gray-600"
+                          }`}
+                        >
                           {live.type?.toUpperCase()}
                         </div>
                       </div>
@@ -334,7 +372,9 @@ export default function MultiroomPage() {
                     </div>
                   ))
                 ) : (
-                  <div className={isDark ? 'text-gray-400' : 'text-gray-600'}>Tidak ada yang live 😥</div>
+                  <div className={isDark ? "text-gray-400" : "text-gray-600"}>
+                    Tidak ada yang live 😥
+                  </div>
                 )}
               </div>
             </div>
@@ -345,26 +385,37 @@ export default function MultiroomPage() {
           <div
             className={`fixed inset-0 flex items-center justify-center z-50 ${
               closingAlert ? "animate-fadeOut" : "animate-fadeIn"
-            } ${isDark ? 'bg-black/70' : 'bg-gray-900/70'}`}
+            } ${isDark ? "bg-black/70" : "bg-gray-900/70"}`}
           >
             <div
               className={`rounded-lg p-6 text-center w-80 ${
                 closingAlert ? "animate-fadeOut" : "animate-bounceIn"
               } ${
                 isDark
-                  ? 'bg-[#1a1a1a] border border-gray-600'
-                  : 'bg-white border border-gray-300'
+                  ? "bg-[#1a1a1a] border border-gray-600"
+                  : "bg-white border border-gray-300"
               }`}
             >
               <div className="flex justify-center mb-3">
-                <IoMdAlert className="text-yellow-400 animate-pulse" size={48} />
+                <IoMdAlert
+                  className="text-yellow-400 animate-pulse"
+                  size={48}
+                />
               </div>
-              <h3 className={`text-lg font-semibold mb-2 ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>Perhatian</h3>
-              <p className={`text-sm mb-4 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>{alertMsg}</p>
+              <h3
+                className={`text-lg font-semibold mb-2 ${
+                  isDark ? "text-white" : "text-gray-900"
+                }`}
+              >
+                Perhatian
+              </h3>
+              <p
+                className={`text-sm mb-4 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                {alertMsg}
+              </p>
               <div className="flex gap-2 justify-center">
                 <button
                   onClick={() => {
