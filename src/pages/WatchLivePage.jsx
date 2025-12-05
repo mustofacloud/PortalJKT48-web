@@ -56,8 +56,8 @@ export default function WatchLivePage() {
       }
 
       const stream = live.streaming_url_list?.find((item) => {
-        if (live.type === "idn") return item.label === "original";
-        if (live.type === "showroom") return item.label === "original quality";
+        if (live.type === "idn") return item.label === "Original";
+        if (live.type === "showroom") return item.label === "Original quality";
         return false;
       })?.url;
 
